@@ -5,6 +5,7 @@ const configure = env.state.configurations;
 const handleError = require('../utilities/handlers');
 
 exports.create = (async(req,res)=>{
+    /*  #swagger.tags = ['Resume']  #swagger.ignore = true*/
     try{
         var db = await connect(); 
         var Resume = db.model(configure.DB_COLLECTION_6, resumeSchema);
@@ -51,6 +52,7 @@ exports.read = (async(req,res)=>{
 })
 
 exports.update = (async(req,res)=>{
+    /*  #swagger.tags = ['Resume']  #swagger.ignore = true*/
     try{
         var db = await connect(); 
         var Resume = db.model(configure.DB_COLLECTION_6, resumeSchema);
@@ -77,6 +79,7 @@ exports.update = (async(req,res)=>{
 });
 
 exports.delete = (async(req,res)=>{
+    /*  #swagger.tags = ['Resume']  #swagger.ignore = true*/
     try{
         var db = await connect(); 
         var Resume = db.model(configure.DB_COLLECTION_6, resumeSchema);

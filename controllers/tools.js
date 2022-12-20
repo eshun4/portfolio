@@ -5,6 +5,7 @@ const configure = env.state.configurations;
 const handleError = require('../utilities/handlers');
 
 exports.create = (async(req,res)=>{
+    /*  #swagger.tags = ['Tools']  #swagger.ignore = true*/
     try{
         var db = await connect(); 
         var Tool = db.model(configure.DB_COLLECTION_4, toolsSchema);
@@ -52,6 +53,7 @@ exports.read = (async(req,res)=>{
     }
 })
 exports.update = (async(req,res)=>{
+    /*  #swagger.tags = ['Tools']  #swagger.ignore = true*/
     try{
         var db = await connect(); 
         var Tool = db.model(configure.DB_COLLECTION_4, toolsSchema);
@@ -78,6 +80,7 @@ exports.update = (async(req,res)=>{
     }
 })
 exports.delete = (async(req,res)=>{
+    /*  #swagger.tags = ['Tools']  #swagger.ignore = true*/
     try{
         var db = await connect(); 
         var Tool = db.model(configure.DB_COLLECTION_4, toolsSchema);

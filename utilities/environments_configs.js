@@ -3,6 +3,7 @@ dotenv.config({path: "../portfolio/.env" });
 
 const configurations = {
     BASE_URL:process.env.BASE_URL,
+    
     PORT:process.env.PORT,
     BASE_VERSIONING:process.env.BASE_VERSIONING,
     BASE_PATH:process.env.BASE_PATH,
@@ -32,6 +33,9 @@ const configurations = {
     AUTH0_ISSUER_BASE_URL:process.env.AUTH0_ISSUER_BASE_URL,
     AUTH0_CLIENT_ID:process.env.AUTH0_CLIENT_ID,
     AUTH0_CLIENT_SECRET:process.env.AUTH0_CLIENT_SECRET,
+    /* pulls the Redis URL from .env */
+    REDIS_URL:process.env.REDIS_URL,
+    REDIS_PORT:process.env.REDIS_PORT,
 }
 
 class Configurations {

@@ -5,6 +5,7 @@ const configure = env.state.configurations;
 const handleError = require('../utilities/handlers');
 
 exports.create = (async(req,res)=>{
+    /*  #swagger.tags = ['Experience']  #swagger.ignore = true*/
     try{
         var db = await connect(); 
         var Experience = db.model(configure.DB_COLLECTION_5, experienceSchema);
@@ -53,6 +54,7 @@ exports.read = (async(req,res)=>{
     }
 })
 exports.update = (async(req,res)=>{
+    /*  #swagger.tags = ['Experience']  #swagger.ignore = true*/
     try{
         var db = await connect(); 
         var Experience = db.model(configure.DB_COLLECTION_5, experienceSchema);
@@ -79,6 +81,7 @@ exports.update = (async(req,res)=>{
     }
 })
 exports.delete = (async(req,res)=>{
+    /*  #swagger.tags = ['Experience']  #swagger.ignore = true*/
     try{
         var db = await connect(); 
         var Experience = db.model(configure.DB_COLLECTION_5, experienceSchema);

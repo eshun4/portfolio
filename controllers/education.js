@@ -4,8 +4,10 @@ const env = require('../utilities/environments_configs');
 const configure = env.state.configurations;
 const handleError = require('../utilities/handlers');
 const { ObjectId } = require("mongodb");
+const client = require('../redis-manager/redis');
 
 exports.create = (async(req,res)=>{
+    /*  #swagger.tags = ['Education']  #swagger.ignore = true  */
     try{
         var db = await connect(); 
         var Education = db.model(configure.DB_COLLECTION_2, educationSchema);
@@ -22,6 +24,7 @@ exports.create = (async(req,res)=>{
             graduated:req.body.graduated,
             gpa:req.body.gpa
         });
+        const obj = req.body;;
         //Come back to the 3 lines of code below later
         education.talents.push(req.body.talents)
         education.fav_subjects.push(req.body.fav_subjects)
@@ -55,6 +58,7 @@ exports.read = (async(req,res)=>{
     }
 })
 exports.update = (async(req,res)=>{
+     /*  #swagger.tags = ['Education']  #swagger.ignore = true  */
     try{
         var db = await connect(); 
         var Education = db.model(configure.DB_COLLECTION_2, educationSchema);
@@ -86,6 +90,7 @@ exports.update = (async(req,res)=>{
 })
 
 exports.delete = (async(req,res)=>{
+    /*  #swagger.tags = ['Education']  #swagger.ignore = true  */
     try{
         var db = await connect(); 
         var Education =db.model(configure.DB_COLLECTION_2, educationSchema);
