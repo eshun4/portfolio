@@ -9,7 +9,7 @@
 //     port:REDIS_PORT
 // };
 
-// const client = redis.createClient(options);
+// const client = redis.createClient();
 // client.connect();
 
 // client.on("connect", ()=>{
