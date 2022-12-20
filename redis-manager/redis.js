@@ -4,12 +4,12 @@ const configure = env.state.configurations;
 const REDIS_PORT = `${configure.REDIS_PORT}`;
 const REDIS_URL = `${configure.REDIS_URL}`;
 
-const options = {
-    host:REDIS_URL,
-    port:REDIS_PORT
-};
+// const options = {
+//     host:REDIS_URL,
+//     port:REDIS_PORT
+// };
 
-const client = redis.createClient(options);
+const client = redis.createClient();
 client.connect();
 
 client.on("connect", ()=>{
