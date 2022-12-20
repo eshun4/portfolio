@@ -4,6 +4,8 @@ const env = require('../utilities/environments_configs');
 const configure = env.state.configurations;
 
 exports.signin = (async(req,res)=>{
+   /* 
+       #swagger.ignore = true */
     try{
         const db = await connect();    
         const User = db.model(configure.DB_COLLECTION_1, userSchema);
