@@ -2,9 +2,10 @@ const express = require("express");
 const app = express();
 const routes = require("./routes/index");
 const env = require("./utilities/environments_configs");
-const PORT = env.state.configurations.PORT;
+const configure =env.state.configurations
+const PORT = configure.PORT;
 
 app.use(routes);
 app.listen(PORT, ()=>{
-    console.log(`This server is running on ${env.state.configurations.BASE_URL}${PORT}` )}
+    console.log(`This server is running on ${configure.BASE_URL}${PORT}` )}
 );
