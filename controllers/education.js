@@ -4,7 +4,7 @@ const env = require('../utilities/environments_configs');
 const configure = env.state.configurations;
 const handleError = require('../utilities/handlers');
 const { ObjectId } = require("mongodb");
-const client = require('../redis-manager/redis');
+const client = require('../redis/redis');
 
 exports.create = (async(req,res)=>{
     /*  #swagger.tags = ['Education']  #swagger.ignore = true  */

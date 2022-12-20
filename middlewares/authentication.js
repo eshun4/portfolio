@@ -4,7 +4,7 @@ const config = {
   authRequired: false,
   auth0Logout: true,
   secret: `${env.state.configurations.AUTH0_CLIENT_SECRET}`,
-  baseURL: '`${env.state.configurations.BASE_URL}${env.state.configurations.PORT}`',
+  baseURL: 'http://localhost:3000',
   clientID: `${env.state.configurations.AUTH0_CLIENT_ID}`,
   issuerBaseURL: `${env.state.configurations.AUTH0_ISSUER_BASE_URL}`
 };
