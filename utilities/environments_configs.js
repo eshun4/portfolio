@@ -1,5 +1,5 @@
 const dotenv = require("dotenv");
-dotenv.config({path: "../portfolio/.env" });
+dotenv.config({path: ".env" });
 
 const configurations = {
     BASE_URL:process.env.BASE_URL,
