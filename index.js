@@ -7,5 +7,5 @@ const PORT = configure.PORT;
 
 app.use(routes);
 app.listen(PORT, ()=>{
-    console.log(`This server is running on ${configure.BASE_URL}${PORT}` )}
+    console.log(`This server is running on http://localhost:${PORT}` )}
 );
