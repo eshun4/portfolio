@@ -15,16 +15,30 @@ const project = `${env.state.configurations.PROJECTS}`;
 const documentation = `${env.state.configurations.DOCUMENTATION}`;
 const resume = `${env.state.configurations.RESUME}`;
 const tools = `${env.state.configurations.TOOLS_AND_ETHICS}`;
+const { auth } = require('express-openid-connect');
+const config = require('../middlewares/authentication');
+const userRoute = require("../routes/user");
+const user = `${env.state.configurations.USER}`;
+const bodyParser = require("body-parser");
+const cors = require('cors');
 // const admin = `${env.state.configurations.ADMIN_PANEL}`;
 // const version = `${env.state.configurations.BASE_VERSIONING}`;
 // const base_path = `${env.state.configurations.BASE_PATH}`;
+
+
 const swaggerJson = require('../swagger_docs.json');
+router.use(bodyParser.urlencoded({extended:true}), bodyParser.json());
+router.use(cors());
+
+router.use(auth(config));
+router.use(user, userRoute);
 router.use(home, homeRoute );
 router.use(education, eduRoute );
 router.use(experience, expRoute );
 router.use(project, projRoute );
 router.use(resume, resRoute );
 router.use(tools, toolsRoute);
+
 router.use(documentation, swaggerUI.serve, swaggerUI.setup(swaggerJson));
 
 

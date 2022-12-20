@@ -1,8 +1,6 @@
 const express = require("express");
 const app = express();
 const routes = require("./routes/index");
-const cors = require('cors');
-app.use(cors());
 const env = require("./utilities/environments_configs");
 const PORT = env.state.configurations.PORT;
 

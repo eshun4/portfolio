@@ -14,6 +14,7 @@ const configurations = {
     RESUME:process.env.RESUME,
     ADMIN_PANEL:process.env.ADMIN_PANEL,
     DOCUMENTATION:process.env.DOCUMENTATION,
+    USER:process.env.USER,
     //MONGODB REDENTIALS
     DB_USERNAME:process.env.DB_USERNAME,
     DB_PASSWORD:process.env.DB_PASSWORD,
