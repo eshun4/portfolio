@@ -9,7 +9,7 @@ const options = {
     port:REDIS_PORT
 };
 
-const client = redis.createClient();
+const client = redis.createClient(options);
 client.connect();
 
 client.on("connect", ()=>{
