@@ -3,10 +3,11 @@ import Nav from "./Components/NavBar";
 
 function App() {
   return (
-    <div className="App">
+    <div >
       <header className="App-header">
    <Nav/>
       </header>
+      <h1> This is the homepage.</h1>
     </div>
   );
 }

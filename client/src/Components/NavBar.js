@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 // FaFacebook, FaLinkedin, FaInstagram
-
+import { Link } from "react-router-dom";
 
 function Nav() {
 	const navRef = useRef();
@@ -14,12 +14,12 @@ function Nav() {
 		<header>
 			<h3 className="logo">Kofi Junior Eshun</h3>
 			<nav ref={navRef}>
-				<a href="/#">Home</a>
-				<a href="/#">Education</a>
-				<a href="/#">Projects</a>
-				<a href="/#">Tools</a>
-                <a href="/#">Ethics</a>
-                <a href="/#">Resume/CV</a>                
+				<Link to="/">Home</Link>
+				<Link to="/education">Education</Link>
+				<Link to="/projects">Projects</Link>
+				<Link to="/tools">Tools</Link>
+                <Link to="/ethics">Ethics</Link>
+                <Link to="/resume">Resume/CV</Link>                
 				<button
 					className="nav-btn nav-close-btn"
 					onClick={showNavbar}>

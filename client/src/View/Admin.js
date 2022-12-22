@@ -1,13 +1,15 @@
 import React from "react";
+
+
 import Nav from "../Components/NavBar";
 
-const Ethics = ()=>{
+const Admin = ()=>{
     return (
         <div> 
         <Nav/>
-        <h1> This is the Ethics page</h1>
+        <h1> This is the Admin page</h1>
          </div>)
 }
 
 
-export default Ethics;
+export default Admin;
