@@ -94,4 +94,20 @@ exports.delete = (async(req,res)=>{
     }catch(err){
         res.send(err.message);
     }
-})
+});
+
+exports.adminGET = (async(req,res)=>{
+    try{
+        var db = await connect(); 
+        var Resume = db.model(configure.DB_COLLECTION_6, resumeSchema);
+        Resume.find({}, (err, resume)=>{
+            if(err){
+                res.send(err.message);
+            }else{
+                res.send(resume);
+            }
+        });
+    }catch(e){
+        res.send(e.message);
+    }
+});

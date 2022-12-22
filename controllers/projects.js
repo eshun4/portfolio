@@ -90,4 +90,20 @@ exports.delete = (async(req,res)=>{
     }catch(err){
         res.send(err.message);
     }
-})
+});
+
+exports.adminGET = (async(req,res)=>{
+    try{
+        var db = await connect(); 
+        var Project = db.model(configure.DB_COLLECTION_3, projectsSchema);
+        Project.find({}, (err, project)=>{
+            if(err){
+                res.send(err.message);
+            }else{
+                res.send(project);
+            }
+        });
+    }catch(e){
+        res.send(e.message);
+    }
+});

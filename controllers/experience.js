@@ -97,3 +97,20 @@ exports.delete = (async(req,res)=>{
         res.send(err.message);
     }
 })
+
+
+exports.adminGET = (async(req,res)=>{
+    try{
+        var db = await connect(); 
+        var Experience = db.model(configure.DB_COLLECTION_5, experienceSchema);
+        Experience.find({}, (err, experience)=>{
+            if(err){
+                res.send(err.message);
+            }else{
+                res.send(experience);
+            }
+        });
+    }catch(e){
+        res.send(e.message);
+    }
+});

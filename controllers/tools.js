@@ -95,4 +95,20 @@ exports.delete = (async(req,res)=>{
     }catch(err){
         res.send(err.message);
     }
-})
+});
+
+exports.adminGET = (async(req,res)=>{
+    try{
+        var db = await connect(); 
+        var Tool = db.model(configure.DB_COLLECTION_4, toolsSchema);
+        Tool.find({}, (err, tool)=>{
+            if(err){
+                res.send(err.message);
+            }else{
+                res.send(tool);
+            }
+        });
+    }catch(e){
+        res.send(e.message);
+    }
+});

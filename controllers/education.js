@@ -105,4 +105,20 @@ exports.delete = (async(req,res)=>{
     }catch(err){
         res.send(err.message);
     }
-})
+});
+
+exports.adminGET = (async(req,res)=>{
+    try{
+        var db = await connect(); 
+        var Education =db.model(configure.DB_COLLECTION_2, educationSchema);
+        Education.find({}, (err, education)=>{
+            if(err){
+                res.send(err.message);
+            }else{
+                res.send(education);
+            }
+        });
+    }catch(e){
+        res.send(e.message);
+    }
+});
