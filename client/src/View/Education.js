@@ -1,10 +1,13 @@
 import Nav from "../Components/NavBar";
-import React from "react";
+import SearchHeader from "../Components/SearchHeader";
 
 const Education = ()=>{
     return (
         <div> 
         <Nav/>
+                    <SearchHeader/>
+                    <div className="belowNav">
+                    </div>
         <h1> This is the Education page</h1>
          </div>)
 }

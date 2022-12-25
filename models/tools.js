@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const toolsValidator = require("../middlewares/education");
+const toolsValidator = require("../middlewares/tools");
 
 const toolsSchema = new mongoose.Schema({
     tool_name: {
@@ -7,17 +7,14 @@ const toolsSchema = new mongoose.Schema({
         required:[true, "Tool name is Required."],
         validate:toolsValidator[0].validator1 ,},
     tool_description: {
-        type:Date, 
-        required:[true, "Start Date is Required."],
-        validate:toolsValidator[0].validator2 ,},
+        type:String, 
+        required:[true, "Tool Description is Required."] ,},
     year_acquired: {
         type:String, 
-        required:[true, "Year Acquired is Required."],
-        validate:toolsValidator[0].validator3 ,},
+        required:[true, "Year Acquired is Required."],},
     proficiency_level: [{
         type:String, 
-        required:[true, "Proficiency is Required."],
-        validate:toolsValidator[0].validator4 ,},],
+        required:[true, "Proficiency is Required."],},],
     attributes: [{
         type:String, 
         required:[true, "Attributes is Required."],

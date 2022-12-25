@@ -2,11 +2,13 @@ const redis = require('redis');
 const env = require("../utilities/environments_configs");
 const configure = env.state.configurations;
 const REDIS_PORT = `${configure.REDIS_PORT}`;
-const REDIS_URL = `${configure.REDIS_URL}`;
+const REDIS_URL = `${configure.REDIS_URL}`
+const password = `${configure.REDIS_PASSWORD}`;
 
 const options = {
     host:REDIS_URL,
-    port:REDIS_PORT
+    port:REDIS_PORT,
+    password:password
 };
 
 const client = redis.createClient(options);

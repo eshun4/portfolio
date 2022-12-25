@@ -1,13 +1,16 @@
 import './App.css';
 import Nav from "./Components/NavBar";
+import SearchHeader from '../src/Components/SearchHeader';
 
 function App() {
   return (
     <div >
       <header className="App-header">
-   <Nav/>
+      <Nav/>                    
       </header>
-      <h1> This is the homepage.</h1>
+      <SearchHeader/>
+      <div className="belowNav">
+                    </div>
     </div>
   );
 }

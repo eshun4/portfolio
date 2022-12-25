@@ -36,6 +36,7 @@ const configurations = {
     /* pulls the Redis URL from .env */
     REDIS_URL:process.env.REDIS_URL,
     REDIS_PORT:process.env.REDIS_PORT,
+    REDIS_PASSWORD:process.env.REDIS_PASSWORD
 }
 
 class Configurations {
