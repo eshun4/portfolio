@@ -4,6 +4,7 @@ const env = require('../utilities/environments_configs');
 const configure = env.state.configurations;
 const handleError = require('../utilities/handlers');
 const { ObjectId } = require("mongodb");
+const redis = require('../redis/redis');
 
 exports.create = (async(req,res)=>{
     /*  #swagger.tags = ['Tools']  #swagger.ignore = true*/
@@ -40,15 +41,22 @@ exports.read = (async(req,res)=>{
     try{
         var db = await connect(); 
         var Tool = db.model(configure.DB_COLLECTION_4, toolsSchema);
-        return Tool.findOne({ 
+        var tool = await Tool.findOne({ 
             _id:ObjectId(req.params)
-        }).then(async (tool) => {
-            if (tool) {
-                res.send(tool);
-            } else {
-                res.send("No Tool Found.");
-            }
         });
+        let cacheEntry =  await redis.get(`tool:${tool}`);
+            if(cacheEntry){
+                cacheEntry = JSON.parse(cacheEntry);
+                if(cacheEntry.length < tool.length ){
+                    redis.set(`tool:${tool}`, JSON.stringify(tool), 'EX', 3600);
+                }
+                res.send({...cacheEntry, 'source':'cache'});
+            }
+            else if(!cacheEntry){
+                // education = JSON.parse(education);
+                redis.set(`tool:${tool}`, JSON.stringify(tool),'EX', 604_800);
+                res.status(200).send({...tool, 'source':'API'});
+            }
     }catch(err){
         res.send(err.message);
     }
@@ -102,13 +110,20 @@ exports.adminGET = (async(req,res)=>{
     try{
         var db = await connect(); 
         var Tool = db.model(configure.DB_COLLECTION_4, toolsSchema);
-        Tool.find({}, (err, tool)=>{
-            if(err){
-                res.send(err.message);
-            }else{
-                res.send(tool);
+        var tool = await Tool.find({});
+        let cacheEntry =  await redis.get(`tool:${tool}`);
+            if(cacheEntry){
+                cacheEntry = JSON.parse(cacheEntry);
+                if(cacheEntry.length < tool.length ){
+                    redis.set(`tool:${tool}`, JSON.stringify(tool), 'EX', 3600);
+                }
+                res.send({...cacheEntry, 'source':'cache'});
             }
-        });
+            else if(!cacheEntry){
+                // education = JSON.parse(education);
+                redis.set(`tool:${tool}`, JSON.stringify(tool),'EX', 604_800);
+                res.status(200).send({...tool, 'source':'API'});
+            }
     }catch(e){
         res.send(e.message);
     }

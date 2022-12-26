@@ -3,7 +3,7 @@ const projectsSchema = require("../models/projects");
 const env = require('../utilities/environments_configs');
 const configure = env.state.configurations;
 const handleError = require('../utilities/handlers');
-
+const redis = require('../redis/redis');
 exports.create = (async(req,res)=>{
     /*  #swagger.tags = ['Projects']  #swagger.ignore = true*/
     try{
@@ -34,15 +34,22 @@ exports.read = (async(req,res)=>{
     try{
         var db = await connect(); 
         var Project = db.model(configure.DB_COLLECTION_3, projectsSchema);
-        return Project.findOne({ 
+        var project =  await Project.findOne({ 
             _id:ObjectId(req.params)
-        }).then(async (project) => {
-            if (project) {
-                res.send(project);
-            } else {
-                res.send("No Project Found.");
+        })
+        let cacheEntry =  await redis.get(`project:${project}`);
+            if(cacheEntry){
+                cacheEntry = JSON.parse(cacheEntry);
+                if(cacheEntry.length < project.length ){
+                    redis.set(`project:${project}`, JSON.stringify(project), 'EX', 3600);
+                }
+                res.send({...cacheEntry, 'source':'cache'});
             }
-        });
+            else if(!cacheEntry){
+                // education = JSON.parse(education);
+                redis.set(`project:${project}`, JSON.stringify(project),'EX', 604_800);
+                res.status(200).send({...project, 'source':'API'});
+            }
     }catch(err){
         res.send(err.message);
     }
@@ -96,13 +103,20 @@ exports.adminGET = (async(req,res)=>{
     try{
         var db = await connect(); 
         var Project = db.model(configure.DB_COLLECTION_3, projectsSchema);
-        Project.find({}, (err, project)=>{
-            if(err){
-                res.send(err.message);
-            }else{
-                res.send(project);
+        var project = await Project.find({});
+        let cacheEntry =  await redis.get(`project:${project}`);
+            if(cacheEntry){
+                cacheEntry = JSON.parse(cacheEntry);
+                if(cacheEntry.length < project.length ){
+                    redis.set(`project:${project}`, JSON.stringify(project), 'EX', 3600);
+                }
+                res.send({...cacheEntry, 'source':'cache'});
             }
-        });
+            else if(!cacheEntry){
+                // education = JSON.parse(education);
+                redis.set(`project:${project}`, JSON.stringify(project),'EX', 604_800);
+                res.status(200).send({...project, 'source':'API'});
+            }
     }catch(e){
         res.send(e.message);
     }

@@ -3,6 +3,7 @@ const resumeSchema = require("../models/resume");
 const env = require('../utilities/environments_configs');
 const configure = env.state.configurations;
 const handleError = require('../utilities/handlers');
+const redis = require('../redis/redis');
 
 exports.create = (async(req,res)=>{
     /*  #swagger.tags = ['Resume']  #swagger.ignore = true*/
@@ -37,15 +38,22 @@ exports.read = (async(req,res)=>{
     try{
         var db = await connect(); 
         var Resume = db.model(configure.DB_COLLECTION_6, resumeSchema);
-        return Resume.findOne({ 
+        var resume = await Resume.findOne({ 
             _id:ObjectId(req.params)
-        }).then(async (resume) => {
-            if (resume) {
-                res.send(resume);
-            } else {
-                res.send("No Resume Found.");
-            }
         });
+        let cacheEntry =  await redis.get(`resume:${resume}`);
+            if(cacheEntry){
+                cacheEntry = JSON.parse(cacheEntry);
+                if(cacheEntry.length < resume.length ){
+                    redis.set(`resume:${resume}`, JSON.stringify(resume), 'EX', 3600);
+                }
+                res.send({...cacheEntry, 'source':'cache'});
+            }
+            else if(!cacheEntry){
+                // education = JSON.parse(education);
+                redis.set(`resume:${resume}`, JSON.stringify(resume),'EX', 604_800);
+                res.status(200).send({...resume, 'source':'API'});
+            }
     }catch(err){
         res.send(err.message);
     }
@@ -100,13 +108,20 @@ exports.adminGET = (async(req,res)=>{
     try{
         var db = await connect(); 
         var Resume = db.model(configure.DB_COLLECTION_6, resumeSchema);
-        Resume.find({}, (err, resume)=>{
-            if(err){
-                res.send(err.message);
-            }else{
-                res.send(resume);
+        var resume = await Resume.find({});
+        let cacheEntry =  await redis.get(`resume:${resume}`);
+            if(cacheEntry){
+                cacheEntry = JSON.parse(cacheEntry);
+                if(cacheEntry.length < resume.length ){
+                    redis.set(`resume:${resume}`, JSON.stringify(resume), 'EX', 3600);
+                }
+                res.send({...cacheEntry, 'source':'cache'});
             }
-        });
+            else if(!cacheEntry){
+                // education = JSON.parse(education);
+                redis.set(`resume:${resume}`, JSON.stringify(resume),'EX', 604_800);
+                res.status(200).send({...resume, 'source':'API'});
+            }
     }catch(e){
         res.send(e.message);
     }

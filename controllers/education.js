@@ -5,6 +5,7 @@ const configure = env.state.configurations;
 const handleError = require('../utilities/handlers');
 const { ObjectId } = require("mongodb");
 const client = require('../redis/redis');
+const redis = require('../redis/redis');
 
 exports.create = (async(req,res)=>{
     /*  #swagger.tags = ['Education']  #swagger.ignore = true  */
@@ -24,12 +25,12 @@ exports.create = (async(req,res)=>{
             graduated:req.body.graduated,
             gpa:req.body.gpa
         });
-        const obj = req.body;;
         //Come back to the 3 lines of code below later
         education.talents.push(req.body.talents)
         education.fav_subjects.push(req.body.fav_subjects)
         education.school_clubs.push(req.body.school_clubs)
-        return education.save((err) => {
+        await education.save(
+            (err) => {
             if (err) {
                 res.send(handleError(err.errors));
             }else{
@@ -44,15 +45,20 @@ exports.read = (async(req,res)=>{
     try{
         var db = await connect(); 
         var Education = db.model(configure.DB_COLLECTION_2, educationSchema);
-        return Education.findOne({ 
-            _id:ObjectId(req.params)
-        }).then(async (education) => {
-            if (education) {
-                res.send(education);
-            } else {
-                res.send("No Education Found.");
+        var education = await Education.findOne({ _id:ObjectId(req.params)});
+        let cacheEntry =  await client.get(`user_edu:${education}`);
+            if(cacheEntry){
+                cacheEntry = JSON.parse(cacheEntry);
+                if(cacheEntry._id == education._id){
+                    res.send({...cacheEntry, 'source':'cache'});
+                }else{
+                    res.send({...education._doc, 'source':'API'});
+                }
             }
-        });
+            else if(!cacheEntry){
+                redis.set(`user_edu:${education}`, JSON.stringify(education),'EX', 604_800);
+                res.status(200).send({...education._doc, 'source':'API'});
+            }
     }catch(err){
         res.send(err.message);
     }
@@ -94,8 +100,7 @@ exports.delete = (async(req,res)=>{
     try{
         var db = await connect(); 
         var Education =db.model(configure.DB_COLLECTION_2, educationSchema);
-        return await Education.findOneAndDelete({ _id: ObjectId(req.params.id )})
-        .then((education, err)=>{
+        await Education.findOneAndDelete({ _id: ObjectId(req.params.id )}).then((education, err)=>{
             if(err){
                 res.status(500).send(err.message);
             }else{
@@ -111,13 +116,21 @@ exports.adminGET = (async(req,res)=>{
     try{
         var db = await connect(); 
         var Education =db.model(configure.DB_COLLECTION_2, educationSchema);
-        Education.find({}, (err, education)=>{
-            if(err){
-                res.send(err.message);
-            }else{
-                res.send(education);
+        var education = await Education.find({});
+        let cacheEntry =  await client.get(`education:${education}`);
+            if(cacheEntry){
+                cacheEntry = JSON.parse(cacheEntry);
+                if(cacheEntry.length < education.length ){
+                    redis.del(`education`);
+                    redis.set(`education:${education}`, JSON.stringify(education), 'EX', 3600);
+                }
+                res.send({...cacheEntry, 'source':'cache'});
             }
-        });
+            else if(!cacheEntry){
+                // education = JSON.parse(education);
+                redis.set(`education:${education}`, JSON.stringify(education),'EX', 604_800);
+                res.status(200).send({...education, 'source':'API'});
+            }
     }catch(e){
         res.send(e.message);
     }

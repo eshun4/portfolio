@@ -8,7 +8,7 @@ import GreetingsQuotesAndCalender from "../Components/GreetingsCalendarAndQuote"
 import Label from "../Components/Label";
 import Input from "../Components/Input";
 
-// const filterList = (id, version) => (item) =>  id !== item && version !== item ;
+const filterList = (id, version) => (item) =>  id !== item && version !== item ;
 // class Admin extends Component{
 //     constructor(props){
 //         super(props);
@@ -88,25 +88,36 @@ import Input from "../Components/Input";
 
 const Admin = ()=>{
 
-    
-    const fetchData = async()=>{
-        await fetch(`http://localhost:5000/v1/portfolio/kofijnreshun/dev/admin_portfolio_panel/admin_kje/y/tools_and_ethics`)
-         .then((response) => response.json())
-         .then((data) => handleChange(data)).catch((error)=> {console.log(error)});
-         // this.intervalID = setInterval(() =>this.setTime(new Date().toLocaleTimeString()), 1000);
-         // this.intervalID = setInterval(() =>this.setDate(new Date().toDateString()), 1000);
-     }
-    const [state, setState] = useState([]);
+    const initState = {
+        result: [],
+        date:'Thu Dec 22 2022',
+        time:'10:08:32 PM', 
+        quotes:[{quote:" There is nothing stronger in the world than gentleness",
+                        author:"Han Suyin"}],
+        crud: ["UPDATE", "DELETE"],
+        endpoints:[{Education:'/education'}, {Experience:'/experience'},{ Projects:'/projects'}, {Resume:'/resume_cv'}, {"Tools and Ethics":'/tools_and_ethics'}],
+        point:"/education",
+        head:[]
+    }
+
+    const [state, setState] = useState(initState);
 
      useEffect(()=>{
-        fetchData();
+        // fetchData();
+        fetch(`http://localhost:5000/v1/portfolio/kofijnreshun/dev/admin_portfolio_panel/admin_kje/education`)
+        .then((response) => response.json())
+        .then((data) => handleChange(data)).catch((error)=> {console.log(error)});
      },[] )
      console.log(state)
     //  const changeHandler = e => {
     //     setAllValues({...allValues, [e.target.name]: e.target.value})
     //  }
 
-   
+    // const fetchData = async()=>{
+       
+    //     // this.intervalID = setInterval(() =>this.setTime(new Date().toLocaleTimeString()), 1000);
+    //     // this.intervalID = setInterval(() =>this.setDate(new Date().toDateString()), 1000);
+    // }
 
     // const fetchQuote = async()=>{
     //     await fetch('https://api.api-ninjas.com/v1/quotes?category=inspirational', {method:'GET',headers: { 'X-Api-Key': 'MXDpgwM2IkDeQUB1VxebKg==Wg57rs0u3gO0U11a'},})
@@ -133,17 +144,11 @@ const Admin = ()=>{
     // }
 
     const handleChange = (data) => {                
-        setState({state:data})
+        setState(prevState =>([{
+            ...prevState.result, result:data
+        }]));
     };
 
-    // date:'Thu Dec 22 2022',
-    //     time:'10:08:32 PM', 
-    //     quotes:[{quote:" There is nothing stronger in the world than gentleness",
-    //                     author:"Han Suyin"}],
-    //     crud: ["UPDATE", "DELETE"],
-    //     endpoints:[{Education:'/education'}, {Experience:'/experience'},{ Projects:'/projects'}, {Resume:'/resume_cv'}, {"Tools and Ethics":'/tools_and_ethics'}],
-    //     point:"/education",
-    //     head:[]
     // const setRoute =(event) =>{
     //     setAllValues({...allValues});
     // }
@@ -154,7 +159,7 @@ const Admin = ()=>{
              <SearchHeader/>
                     <div className="belowNav">
                     </div>
-                    
+                    {console.log(state.result)}
                     {/* <div className="realBody">
                         <GreetingsQuotesAndCalender list={allValues.quotes} date={allValues.date} time={allValues.time}/>
                     <div className="routes"> 

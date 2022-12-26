@@ -3,6 +3,7 @@ const experienceSchema = require("../models/experience");
 const env = require('../utilities/environments_configs');
 const configure = env.state.configurations;
 const handleError = require('../utilities/handlers');
+const redis = require('../redis/redis');
 
 exports.create = (async(req,res)=>{
     /*  #swagger.tags = ['Experience']  #swagger.ignore = true*/
@@ -40,15 +41,22 @@ exports.read = (async(req,res)=>{
     try{
         var db = await connect(); 
         var Experience = db.model(configure.DB_COLLECTION_5, experienceSchema);
-        return Experience.findOne({ 
+        var experience = await Experience.findOne({ 
             _id:ObjectId(req.params)
-        }).then(async (experience) => {
-            if (experience) {
-                res.send(experience);
-            } else {
-                res.send("No Experience Found.");
-            }
         });
+        let cacheEntry =  await redis.get(`experience:${experience}`);
+            if(cacheEntry){
+                cacheEntry = JSON.parse(cacheEntry);
+                if(cacheEntry.length < experience.length ){
+                    redis.set(`experience:${experience}`, JSON.stringify(experience), 'EX', 3600);
+                }
+                res.send({...cacheEntry, 'source':'cache'});
+            }
+            else if(!cacheEntry){
+                // education = JSON.parse(education);
+                redis.set(`experience:${experience}`, JSON.stringify(experience),'EX', 604_800);
+                res.status(200).send({...experience, 'source':'API'});
+            }
     }catch(err){
         res.send(err.message);
     }
@@ -103,13 +111,20 @@ exports.adminGET = (async(req,res)=>{
     try{
         var db = await connect(); 
         var Experience = db.model(configure.DB_COLLECTION_5, experienceSchema);
-        Experience.find({}, (err, experience)=>{
-            if(err){
-                res.send(err.message);
-            }else{
-                res.send(experience);
+        var experience = await Experience.find({});
+        let cacheEntry =  await redis.get(`experience:${experience}`);
+        if(cacheEntry){
+            cacheEntry = JSON.parse(cacheEntry);
+            if(cacheEntry.length < experience.length ){
+                redis.set(`experience:${experience}`, JSON.stringify(experience), 'EX', 3600);
             }
-        });
+            res.send({...cacheEntry, 'source':'cache'});
+        }
+        else if(!cacheEntry){
+            // education = JSON.parse(education);
+            redis.set(`experience:${experience}`, JSON.stringify(experience),'EX', 604_800);
+            res.status(200).send({...experience, 'source':'API'});
+        }
     }catch(e){
         res.send(e.message);
     }

@@ -1,41 +1,41 @@
-const redis = require('redis');
 const env = require("../utilities/environments_configs");
 const configure = env.state.configurations;
 const REDIS_PORT = `${configure.REDIS_PORT}`;
 const REDIS_URL = `${configure.REDIS_URL}`
-const password = `${configure.REDIS_PASSWORD}`;
+const REDIS_PASSWORD = `${configure.REDIS_PASSWORD}`;
 
+
+const Redis = require('ioredis');
+const fs = require('fs');
 const options = {
     host:REDIS_URL,
     port:REDIS_PORT,
-    password:password
-};
+    password:REDIS_PASSWORD
+}
+const redis = new Redis(options);
 
-const client = redis.createClient(options);
-client.connect();
-
-client.on("connect", ()=>{
+redis.on("connect", ()=>{
     console.log("Redis connecting to Server.");
 });
 
-client.on("ready", ()=>{
+redis.on("ready", ()=>{
     console.log("Redis connection successfully established and ready to use.");
 });
 
-client.on("end", ()=>{
+redis.on("end", ()=>{
     console.log("Redis connection disconnected.");
 });
 
-client.on("error", (err)=>{
+redis.on("error", (err)=>{
     console.log(`Error occured at ${err.message}`);
 });
 
-client.on("reconnecting", (err)=>{
+redis.on("reconnecting", (err)=>{
     console.log("Redis server trying to reconnect");
 });
 
-process.on("SIGINT", ()=>{
-    client.quit();
-});
+// process.on("SIGINT", ()=>{
+//     client.quit();
+// });
 
-module.exports = client;
+module.exports = redis;

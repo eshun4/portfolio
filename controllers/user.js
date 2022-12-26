@@ -17,7 +17,7 @@ exports.signin = (async(req,res)=>{
             profile_image:req.oidc.user.picture,
         }, (err, user) => {
           if(err){
-            console.log(err.message);
+            res.send(err.message);
           }
           res.status(200).redirect('/api_documentation');
         });

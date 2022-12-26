@@ -18,7 +18,7 @@ const admin = `${env.state.configurations.ADMIN_PANEL}`;
 const version = `${env.state.configurations.BASE_VERSIONING}`;
 const base_path = `${env.state.configurations.BASE_PATH}`;
 const adminRouter = require('../routes/admin');
-require('../redis/redis');
+
 
 const swaggerJson = require('../swagger_docs.json');
 router.use(bodyParser.urlencoded({extended:true}), bodyParser.json());
