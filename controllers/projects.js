@@ -43,12 +43,12 @@ exports.read = (async(req,res)=>{
                 if(cacheEntry.length < project.length ){
                     redis.set(`project:${project}`, JSON.stringify(project), 'EX', 3600);
                 }
-                res.send({...cacheEntry, 'source':'cache'});
+                res.send([...cacheEntry]);
             }
             else if(!cacheEntry){
                 // education = JSON.parse(education);
                 redis.set(`project:${project}`, JSON.stringify(project),'EX', 604_800);
-                res.status(200).send({...project, 'source':'API'});
+                res.status(200).send([...project]);
             }
     }catch(err){
         res.send(err.message);
@@ -110,12 +110,12 @@ exports.adminGET = (async(req,res)=>{
                 if(cacheEntry.length < project.length ){
                     redis.set(`project:${project}`, JSON.stringify(project), 'EX', 3600);
                 }
-                res.send({...cacheEntry, 'source':'cache'});
+                res.send([...cacheEntry]);
             }
             else if(!cacheEntry){
                 // education = JSON.parse(education);
                 redis.set(`project:${project}`, JSON.stringify(project),'EX', 604_800);
-                res.status(200).send({...project, 'source':'API'});
+                res.status(200).send([...project]);
             }
     }catch(e){
         res.send(e.message);

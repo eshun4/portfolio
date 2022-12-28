@@ -124,12 +124,12 @@ exports.adminGET = (async(req,res)=>{
                     redis.del(`education`);
                     redis.set(`education:${education}`, JSON.stringify(education), 'EX', 3600);
                 }
-                res.send({...cacheEntry, 'source':'cache'});
+                res.send([...cacheEntry]);
             }
             else if(!cacheEntry){
                 // education = JSON.parse(education);
                 redis.set(`education:${education}`, JSON.stringify(education),'EX', 604_800);
-                res.status(200).send({...education, 'source':'API'});
+                res.status(200).send([...education]);
             }
     }catch(e){
         res.send(e.message);

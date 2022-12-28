@@ -1,12 +1,14 @@
 import React from "react";
 
 
-const DropDown = ({endpoint, val,  onChanged})=>{
-    return <select id="country" value={val} onChange={onChanged}>
-    {endpoint.map((item, index)=>{
-        return <option key={index} value={Object.values(item)}>{Object.keys(item)}</option>
-    })}
-    </select>
+const DropDown = ({onChange})=>{
+    return <select name="endpoints" id="endpoints" onChange={onChange}>
+                <option value="education"> Education</option>
+                <option value="experience">Experience</option>
+                <option value="projects">Projects</option>
+                <option value="tools_and_ethics">Tools and Ethics</option>
+                <option value="resume_cv">Resume/CV</option>
+        </select>
 }
 
 export default DropDown;

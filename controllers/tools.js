@@ -50,12 +50,12 @@ exports.read = (async(req,res)=>{
                 if(cacheEntry.length < tool.length ){
                     redis.set(`tool:${tool}`, JSON.stringify(tool), 'EX', 3600);
                 }
-                res.send({...cacheEntry, 'source':'cache'});
+                res.send([...cacheEntry]);
             }
             else if(!cacheEntry){
                 // education = JSON.parse(education);
                 redis.set(`tool:${tool}`, JSON.stringify(tool),'EX', 604_800);
-                res.status(200).send({...tool, 'source':'API'});
+                res.status(200).send([...tool]);
             }
     }catch(err){
         res.send(err.message);
@@ -117,12 +117,12 @@ exports.adminGET = (async(req,res)=>{
                 if(cacheEntry.length < tool.length ){
                     redis.set(`tool:${tool}`, JSON.stringify(tool), 'EX', 3600);
                 }
-                res.send({...cacheEntry, 'source':'cache'});
+                res.send([...cacheEntry]);
             }
             else if(!cacheEntry){
                 // education = JSON.parse(education);
                 redis.set(`tool:${tool}`, JSON.stringify(tool),'EX', 604_800);
-                res.status(200).send({...tool, 'source':'API'});
+                res.status(200).send([...tool]);
             }
     }catch(e){
         res.send(e.message);

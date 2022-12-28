@@ -47,12 +47,12 @@ exports.read = (async(req,res)=>{
                 if(cacheEntry.length < resume.length ){
                     redis.set(`resume:${resume}`, JSON.stringify(resume), 'EX', 3600);
                 }
-                res.send({...cacheEntry, 'source':'cache'});
+                res.send([...cacheEntry]);
             }
             else if(!cacheEntry){
                 // education = JSON.parse(education);
                 redis.set(`resume:${resume}`, JSON.stringify(resume),'EX', 604_800);
-                res.status(200).send({...resume, 'source':'API'});
+                res.status(200).send([...resume]);
             }
     }catch(err){
         res.send(err.message);
@@ -115,12 +115,12 @@ exports.adminGET = (async(req,res)=>{
                 if(cacheEntry.length < resume.length ){
                     redis.set(`resume:${resume}`, JSON.stringify(resume), 'EX', 3600);
                 }
-                res.send({...cacheEntry, 'source':'cache'});
+                res.send([...cacheEntry]);
             }
             else if(!cacheEntry){
                 // education = JSON.parse(education);
                 redis.set(`resume:${resume}`, JSON.stringify(resume),'EX', 604_800);
-                res.status(200).send({...resume, 'source':'API'});
+                res.status(200).send([...resume]);
             }
     }catch(e){
         res.send(e.message);
