@@ -1,9 +1,11 @@
 const connect = require('../database/database');
 const resumeSchema = require("../models/resume");
 const env = require('../utilities/environments_configs');
+const { ObjectId } = require("mongodb");
 const configure = env.state.configurations;
 const handleError = require('../utilities/handlers');
 const redis = require('../redis/redis');
+
 
 exports.create = (async(req,res)=>{
     /*  #swagger.tags = ['Resume']  #swagger.ignore = true*/
@@ -25,13 +27,13 @@ exports.create = (async(req,res)=>{
         resume.work_experience.push(req.body.work_experience);
         return resume.save((err) => {
             if (err) {
-                res.send(handleError(err.errors));
+                res.status(500).send(handleError(err.errors));
             }else{
-                res.send(resume);
+                res.send("Successfully added Resource");
             }
           });
     }catch(err){
-        res.send(err.message);
+        res.status(500).send(err.message);
     }
 })
 exports.read = (async(req,res)=>{
@@ -55,7 +57,7 @@ exports.read = (async(req,res)=>{
                 res.status(200).send([...resume]);
             }
     }catch(err){
-        res.send(err.message);
+        res.status(500).send(err.message);
     }
 })
 
@@ -73,16 +75,15 @@ exports.update = (async(req,res)=>{
             education:[],
             tools:[],
             work_experience:[],}})
-        .then((resume, err) => {
+        .then((resume, err)=>{
             if(err){
-                res.send(err.message);
+                res.status(500).send(err.message);
             }else{
-                res.status(200).send(resume);
+                res.send( "Update was successful.");
             }
-        }
-    );
+        });
     }catch(err){
-        res.send(err.message);
+        res.status(500).send(err.message);
     }
 });
 
@@ -96,11 +97,11 @@ exports.delete = (async(req,res)=>{
             if(err){
                 res.status(500).send(err.message);
             }else{
-                res.send({message: "Delete was successful."});
+                res.send( "Delete was successful.");
             }
         });
     }catch(err){
-        res.send(err.message);
+        res.status(500).send(err.message);
     }
 });
 
@@ -123,6 +124,6 @@ exports.adminGET = (async(req,res)=>{
                 res.status(200).send([...resume]);
             }
     }catch(e){
-        res.send(e.message);
+        res.status(500).send(e.message);
     }
 });

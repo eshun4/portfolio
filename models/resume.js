@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const resumeValidator = require("../middlewares/education");
+const resumeValidator = require("../middlewares/resume");
 const env = require("../utilities/environments_configs");
 const configure = env.state.configurations;
 
@@ -7,12 +7,11 @@ const configure = env.state.configurations;
 const resumeSchema = new mongoose.Schema({
     name: {
         type:String, 
-        required:[true, "Name name is Required."],
+        required:[true, "Name is Required."],
         validate:resumeValidator[0].validator1 ,},
     phone: {
         type:Number, 
-        required:[true, "Phone Date is Required."],
-        validate:resumeValidator[0].validator2 ,},
+        required:[true, "Phone Date is Required."],},
     email: {
         type:String, 
         required:[true, "Email is Required."],

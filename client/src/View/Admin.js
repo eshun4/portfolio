@@ -6,9 +6,11 @@ import axios from "axios";
 import Table from '../Components/Table';
 import TimeAndDate from "../Components/TimeAndDate";
 
+
 const Admin = ()=>{
     
     const [quote, setQuote]= useState([])
+   
     
     const getQuoteData = async()=>{
         axios.get(`https://api.api-ninjas.com/v1/quotes?category=inspirational`, 

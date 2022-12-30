@@ -1,9 +1,11 @@
 const connect = require('../database/database');
 const experienceSchema = require("../models/experience");
+const { ObjectId } = require("mongodb");
 const env = require('../utilities/environments_configs');
 const configure = env.state.configurations;
 const handleError = require('../utilities/handlers');
 const redis = require('../redis/redis');
+
 
 exports.create = (async(req,res)=>{
     /*  #swagger.tags = ['Experience']  #swagger.ignore = true*/
@@ -27,13 +29,13 @@ exports.create = (async(req,res)=>{
         experience.type.push(req.body.type);
         return experience.save((err) => {
             if (err) {
-                res.send(handleError(err.errors));
+                res.status(500).send(handleError(err.errors));
             }else{
-                res.send(experience);
+                res.send("Successfully added Resource");
             }
           });
     }catch(err){
-        res.send(err.message);
+        res.status(500).send(err.message);
     }
 });
 
@@ -58,7 +60,7 @@ exports.read = (async(req,res)=>{
                 res.status(200).send([...experience]);
             }
     }catch(err){
-        res.send(err.message);
+        res.status(500).send(err.message);
     }
 })
 exports.update = (async(req,res)=>{
@@ -76,16 +78,16 @@ exports.update = (async(req,res)=>{
             location:[],
             job_requirements:[],
             type:[]}})
-        .then((experience, err) => {
+        .then((experience, err)=>{
             if(err){
-                res.send(err.message);
+                res.status(500).send(err.message);
             }else{
-                res.status(200).send(experience);
+                res.send( "Update was successful.");
             }
         }
     );
     }catch(err){
-        res.send(err.message);
+        res.status(500).send(err.message);
     }
 })
 exports.delete = (async(req,res)=>{
@@ -98,11 +100,11 @@ exports.delete = (async(req,res)=>{
             if(err){
                 res.status(500).send(err.message);
             }else{
-                res.send({message: "Delete was successful."});
+                res.send("Delete was successful.");
             }
         });
     }catch(err){
-        res.send(err.message);
+        res.status(500).send(err.message);
     }
 })
 
@@ -126,6 +128,6 @@ exports.adminGET = (async(req,res)=>{
             res.status(200).send([...experience]);
         }
     }catch(e){
-        res.send(e.message);
+        res.status(500).send(e.message);
     }
 });

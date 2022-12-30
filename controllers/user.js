@@ -17,11 +17,11 @@ exports.signin = (async(req,res)=>{
             profile_image:req.oidc.user.picture,
         }, (err, user) => {
           if(err){
-            res.send(err.message);
+            res.status(500).send(err.message);
           }
           res.status(200).redirect('/api_documentation');
         });
     }catch(e){
-        res.send(e.message);
+        res.status(500).send(e.message);
     }
 });

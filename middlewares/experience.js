@@ -12,12 +12,14 @@ var experienceValidator = [{
     message: 'Job Title must be between {ARGS[0]} and {ARGS[1]} characters.',
   }),
   validator3:validate({
-    validator: 'isDate',
-    message: 'Start Date is invalid.',
+    validator: 'isLength',
+    arguments: [3, 35],
+    message: 'Start Date must be between {ARGS[0]} and {ARGS[1]} characters.',
   }),
   validator4:validate({
-    validator: 'isDate',
-    message: 'End Date is invalid.',
+    validator: 'isLength',
+    arguments: [3, 35],
+    message: 'End Date must be between {ARGS[0]} and {ARGS[1]} characters.',
   }),
   validator5:validate({
     validator: 'isBoolean',

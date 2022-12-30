@@ -3,6 +3,7 @@ import React from "react";
 
 const DropDown = ({onChange})=>{
     return <select name="endpoints" id="endpoints" onChange={onChange}>
+                <option value="#"> -- Select --</option>
                 <option value="education"> Education</option>
                 <option value="experience">Experience</option>
                 <option value="projects">Projects</option>

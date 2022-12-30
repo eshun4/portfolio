@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const experienceValidator = require("../middlewares/education");
+const experienceValidator = require("../middlewares/experience");
 
 const experienceSchema = new mongoose.Schema({
     company: {
@@ -7,7 +7,7 @@ const experienceSchema = new mongoose.Schema({
         required:[true, "Company is Required."],
         validate:experienceValidator[0].validator1 ,},
     job_title: {
-        type:Date, 
+        type:String, 
         required:[true, "Job Title is Required."],
         validate:experienceValidator[0].validator2 ,},
     start_date: {
@@ -20,8 +20,7 @@ const experienceSchema = new mongoose.Schema({
         validate:experienceValidator[0].validator4 ,},],
     status: {
         type:Boolean,
-        required:[true, "Status is Required."],
-        validate:experienceValidator[0].validator5 ,},
+        required:[true, "Status is Required."],},
     location: [{
         type:String, 
         required:[true, "Location is Required."],

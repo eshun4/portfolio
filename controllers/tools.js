@@ -27,13 +27,13 @@ exports.create = (async(req,res)=>{
         tool.work_ethics_desc.push(req.body.work_ethics_desc);
         return tool.save((err) => {
             if (err) {
-                res.send(handleError(err.errors));
+                res.status(500).send(handleError(err.errors));
             }else{
-                res.send(tool);
+                res.send("Successfully added Resource!");
             }
           });
     }catch(err){
-        res.send(err.message)
+        res.status(500).send(err.message)
     }
 });
 
@@ -58,7 +58,7 @@ exports.read = (async(req,res)=>{
                 res.status(200).send([...tool]);
             }
     }catch(err){
-        res.send(err.message);
+        res.status(500).send(err.message);
     }
 })
 exports.update = (async(req,res)=>{
@@ -75,17 +75,15 @@ exports.update = (async(req,res)=>{
             attributes:[],
             work_ethics:[],
             work_ethics_desc:[]}})
-        .then((tool, err) => {
+        .then((tools, err)=>{
             if(err){
-                res.send(err.message);
+                res.status(500).send(err.message);
             }else{
-                res.status(200);
-                res.send(tool);
+                res.send( "Update was successful.");
             }
-        }
-    );
+        });
     }catch(err){
-        res.send(err.message);
+        res.status(500).send(err.message);
     }
 })
 exports.delete = (async(req,res)=>{
@@ -98,11 +96,11 @@ exports.delete = (async(req,res)=>{
             if(err){
                 res.status(500).send(err.message);
             }else{
-                res.send({message: "Delete was successful."});
+                res.send( "Delete was successful.");
             }
         });
     }catch(err){
-        res.send(err.message);
+        res.status(500).send(err.message);
     }
 });
 
@@ -125,6 +123,6 @@ exports.adminGET = (async(req,res)=>{
                 res.status(200).send([...tool]);
             }
     }catch(e){
-        res.send(e.message);
+        res.status(500).send(e.message);
     }
 });

@@ -4,6 +4,7 @@ const env = require('../utilities/environments_configs');
 const configure = env.state.configurations;
 const handleError = require('../utilities/handlers');
 const redis = require('../redis/redis');
+const { ObjectId } = require("mongodb");
 exports.create = (async(req,res)=>{
     /*  #swagger.tags = ['Projects']  #swagger.ignore = true*/
     try{
@@ -21,13 +22,13 @@ exports.create = (async(req,res)=>{
         project.tools_used.push(req.body.tools_used);
         return project.save((err) => {
             if (err) {
-                res.send(handleError(err.errors));
+                res.status(500).send(handleError(err.errors));
             }else{
-                res.send(project);
+                res.send("Successfully added Resource!");
             }
           });
     }catch(err){
-        res.send(err.message)
+        res.status(500).send(err.message)
     }
 })
 exports.read = (async(req,res)=>{
@@ -51,7 +52,7 @@ exports.read = (async(req,res)=>{
                 res.status(200).send([...project]);
             }
     }catch(err){
-        res.send(err.message);
+        res.status(500).send(err.message);
     }
 })
 exports.update = (async(req,res)=>{
@@ -68,17 +69,15 @@ exports.update = (async(req,res)=>{
             results:req.body.results,
             accomplishments:req.body.accomplishments,
             tools_used:[]}})
-        .then((project, err) => {
+        .then((project, err)=>{
             if(err){
-                res.send(err.message);
+                res.status(500).send(err.message);
             }else{
-                res.status(200);
-                res.send(project);
+                res.send( "Update was successful.");
             }
-        }
-    );
+        });
     }catch(err){
-        res.send(err.message);
+        res.status(500).send(err.message);
     }
 })
 exports.delete = (async(req,res)=>{
@@ -91,11 +90,11 @@ exports.delete = (async(req,res)=>{
             if(err){
                 res.status(500).send(err.message);
             }else{
-                res.send({message: "Delete was successful."});
+                res.send( "Delete was successful.");
             }
         });
     }catch(err){
-        res.send(err.message);
+        res.status(500).send(err.message);
     }
 });
 
@@ -118,6 +117,6 @@ exports.adminGET = (async(req,res)=>{
                 res.status(200).send([...project]);
             }
     }catch(e){
-        res.send(e.message);
+        res.status(500).send(e.message);
     }
 });

@@ -7,12 +7,14 @@ var projectsValidator = [{
     message: 'Project Name must be between {ARGS[0]} and {ARGS[1]} characters.',
   }),
   validator2:validate({
-    validator: 'isDate',
-    message: 'Start Date is invalid.',
+    validator: 'isLength',
+    arguments: [3, 35],
+    message: 'Start Date must be between {ARGS[0]} and {ARGS[1]} characters.',
   }),
   validator3:validate({
-    validator: 'isDate',
-    message: 'End Date cannot be empty.',
+    validator: 'isLength',
+    arguments: [3, 35],
+    message: 'Start Date must be between {ARGS[0]} and {ARGS[1]} characters.',
   }),
   validator4:validate({
     validator: 'isLength',

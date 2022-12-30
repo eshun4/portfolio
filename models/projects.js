@@ -1,17 +1,17 @@
 const mongoose = require("mongoose");
-const projectsValidator = require("../middlewares/education");
+const projectsValidator = require("../middlewares/projects");
 
 const projectsSchema = new mongoose.Schema({
     project_name: {
         type:String, 
-        required:[true, "School name is Required."],
+        required:[true, "Project name is Required."],
         validate:projectsValidator[0].validator1 ,},
     start_date: {
-        type:Date, 
+        type:String, 
         required:[true, "Start Date is Required."],
         validate:projectsValidator[0].validator2 ,},
     end_date: {
-        type:Date, 
+        type:String, 
         required:[true, "End Date is Required."],
         validate:projectsValidator[0].validator3 ,},
     requirements: {

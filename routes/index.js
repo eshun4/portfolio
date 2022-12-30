@@ -27,11 +27,11 @@ router.use(cors());
 router.use(auth(config));
 router.use('/user', userRoute);
 router.use('/', homeRoute );
-router.use('/edu', eduRoute );
-router.use('/exp', expRoute );
-router.use('/proj', projRoute );
-router.use('/cv', resRoute );
-router.use('/T_and_E', toolsRoute);
+router.use('/education', eduRoute );
+router.use('/experience', expRoute );
+router.use('/projects', projRoute );
+router.use('/resume_cv', resRoute );
+router.use('/tools_and_ethics', toolsRoute);
 router.use(`${version}${base_path}${admin}`, adminRouter);
 
 router.use(documentation, swaggerUI.serve, swaggerUI.setup(swaggerJson));

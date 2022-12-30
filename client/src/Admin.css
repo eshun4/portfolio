@@ -254,7 +254,7 @@
 
 .section_two{
   display:grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 50% 10% 40%;
   font-size: 1.4em;
   border-top:solid 0.4em var(--mainColor);
   border-bottom:solid 0.4em var(--secondaryColor);
@@ -269,8 +269,11 @@
 }
 
 .section_two_box1{
-  font-size: 1.4em;
+  font-size: 1.2em;
+  padding-left:1em;
+  padding-top:0.2em;
 }
+
 
 table {
   border-collapse: collapse;
@@ -343,6 +346,18 @@ tr:nth-child(even) {
   color:black;
 }
 
+.add_button{
+  padding:6px;
+  border-radius: 12px;
+  font-size:2.2em;
+  background-color: var(--mainColor);
+  color:var(--textColor);
+}
+.add_button:hover{
+  border: solid 0.2rem red;
+  color:var(--secondaryColor);
+
+}
 .form_button:hover{
   border: solid 0.1rem red;
   color:var(--textColor);
@@ -389,28 +404,40 @@ tr:nth-child(even) {
   text-align: center;
   border-bottom: solid 0.3em var(--secondaryColor);
   border-top: solid 0.3em var(--mainColor);
-  margin-top: 0.3em;
+  margin-top: 0.8em;
   margin-bottom: 0.3em;
   padding-top: 0.3em;
   padding-bottom: 0.3em;
+}
+.label_input:nth-child(even){
+  background-color:var(--mainColor)
+}
+
+.label_input:nth-child(odd){
+  background-color:var(--mainColorLight)
 }
 
 #label{
   padding: 0.8em;
   text-align: left;
   text-transform: capitalize;
+  font-size: 0.8em;
+  color:var(--textColor);
 }
 
 .form_input{
   float: right;
-  padding: 6px;
+  padding: 8px;
+  margin-right: 16px;
+  margin-left: 16px;
   border: solid var(--mainColorLight)  1px;
-  font-size: 17px;
+  font-size: 0.8em;
   width:23rem;
   height:2.5rem;
-  padding: 12px 12px;
+  padding: 16px 16px;
   box-shadow: 0 2px 10px 0 rgba(0,0,0,0.6);
-  border-radius: 8px;
+  border-radius: 6px;
+  color:black;
 }
 
 .form_input:focus {
@@ -436,9 +463,183 @@ tr:nth-child(even) {
   border-radius: 8px;
   font-weight:bold;
   font-size: 25px;
+  margin-left:3em;
+  margin-right:1em;
 }
 
 .submit_button:hover{
   color:var(--textColor);
   border: solid var(--mainColor)  3px;
 }
+.resource_button_update{
+  font-size: 1.6em;
+  color:var(--mainColor);
+}
+
+.resource_button_del{
+  font-size: 1.6em;
+  color:var(--secondaryColor);
+  margin-left: 0.2em;
+}
+
+.modal{
+  display:none;
+  width:100%;
+  height:100%;
+  background:#555;
+  z-index:10;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  position:fixed;
+  top:0;
+  left:0;
+  opacity: 0.5;
+}
+
+.popup{
+  display:none;
+  z-index:12;
+  justify-content:center;
+  background-color:var(--mainColor);
+  width:25rem;
+  height:20rem;
+  position: relative;
+  bottom:8em;
+  left:25em;
+  padding:3em;
+}
+
+.popup > h2{
+  font-size: 2.5em;
+  text-align:center;
+  font-family: 'Rock Salt', cursive;
+  font-weight: bold;
+  color: var(--textColor);
+}
+
+.popup > p{
+  font-size: 1.5em;
+  text-align:center;
+  font-weight: bold;
+  color: var(--textColor);
+}
+
+.heartbreak{
+  color:var(--secondaryColor);
+  box-shadow: 4 4px 4px 4 rgba(0,0,0,0.6);
+  font-size: 1.5em;
+}
+
+
+.error{
+  display:flex;
+  justify-content: space-evenly;
+  opacity: 1;
+  animation: fadeinout 2s infinite;
+  font-size: 0.6em;
+  background-color:var(--secondaryColor);
+  color:var(--textColor);
+  padding:0.2em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.form_error{
+  display:flex;
+  justify-content: space-evenly;
+  opacity: 1;
+  animation: fadeinout 2s infinite;
+  font-size: 1em;
+  background-color:var(--secondaryColor);
+  color:var(--textColor);
+  padding:0.2em;
+  font-weight: bold;
+  text-align: center;
+}
+
+@-webkit-keyframes fadeinout {
+  0%,100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+@keyframes fadeinout {
+  0%,100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+.modal_button_error{
+  box-shadow: 4 4px 4px 4 rgba(0,0,0,0.6);
+}
+
+.forms{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+form{
+  padding:1em;
+}
+
+
+
+.profile-card {
+  width: 400px;
+  text-align: center;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0 auto; /* Added */
+  float: none; /* Added */
+  margin-bottom: 10px; 
+  margin-top: 30px; /* Added */
+}
+.card-header {
+  background: var(--mainColor);
+  padding: 60px 40px;
+}
+.pic {
+  display: inline-block;
+  padding: 8px;
+  background: linear-gradient(130deg, var(--mainColor), var(--secondaryColor));
+  border-radius: 50%;
+  animation: animated-gradient 2s linear infinite;
+  background-size: 200% 200%;
+}
+.pic img {
+  display: block;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+@keyframes animated-gradient {
+  25% {
+    background-position: left bottom;
+  }
+  50% {
+    background-position: right bottom;
+  }
+  75% {
+    background-position: right top;
+  }
+  100% {
+    background-position: left top;
+  }
+}
+
+.name {
+  color: var(--textColor);
+  font-size: 32px;
+  font-weight: 600;
+  margin: 10px 0;
+}
+.desc {
+  font-size: 20px;
+  color: var(--secondaryColor);
+}
+
+
+
+
+

@@ -32,13 +32,13 @@ exports.create = (async(req,res)=>{
         await education.save(
             (err) => {
             if (err) {
-                res.send(handleError(err.errors));
+                res.status(500).send(handleError(err.errors));
             }else{
-                res.send(education);
+                res.send("Successfully added Resource");
             }
           });
     }catch(err){
-        res.send(err);
+        res.status(500).send(err);
     }
 })
 exports.read = (async(req,res)=>{
@@ -60,7 +60,7 @@ exports.read = (async(req,res)=>{
                 res.status(200).send({...education._doc, 'source':'API'});
             }
     }catch(err){
-        res.send(err.message);
+        res.status(500).send(err.message);
     }
 })
 exports.update = (async(req,res)=>{
@@ -81,17 +81,15 @@ exports.update = (async(req,res)=>{
             school_clubs:[],
             graduated:req.body.graduated,
             gpa:req.body.gpa}})
-        .then((education, err) => {
+        .then((education, err)=>{
             if(err){
-                res.send(err.message);
+                res.status(500).send(err.message);
             }else{
-                res.status(200);
-                res.send(education);
+                res.send( "Update was successful.");
             }
-        }
-    );
+        });
     }catch(err){
-        res.send(err.message);
+        res.status(500).send(err.message);
     }
 })
 
@@ -104,11 +102,11 @@ exports.delete = (async(req,res)=>{
             if(err){
                 res.status(500).send(err.message);
             }else{
-                res.send({message: "Delete was successful."});
+                res.send("Delete was successful.");
             }
         });
     }catch(err){
-        res.send(err.message);
+        res.status(500).send(err.message);
     }
 });
 
@@ -132,6 +130,6 @@ exports.adminGET = (async(req,res)=>{
                 res.status(200).send([...education]);
             }
     }catch(e){
-        res.send(e.message);
+        res.status(500).send(e.message);
     }
 });
