@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const projectsValidator = require("../middlewares/projects");
+const env = require("../utilities/environments_configs");
+const configure = env.state.configurations;
 
 const projectsSchema = new mongoose.Schema({
     project_name: {
@@ -27,9 +29,8 @@ const projectsSchema = new mongoose.Schema({
         required:[true, "Accomplishments is Required."],
         validate:projectsValidator[0].validator6 ,},
     tools_used: [{
-        type:String, 
-        required:[true, "Tools is Required."],
-        validate:projectsValidator[0].validator7 ,},],
+        type:mongoose.Types.ObjectId, 
+        ref:configure.DB_COLLECTION_4, }],
 },
 {
   timestamps: true,

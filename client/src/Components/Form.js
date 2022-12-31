@@ -16,9 +16,13 @@ const Form = ({list,onHandleInput, onPress})=>{
         .map((it, index)=>{
             return (<div className="label_input" key={index}>
                 <Label id="label" label_name={it.replace(/[^a-zA-Z ]/g, " ")}/>
-                <Input type='text' placeholder={it.replace(/[^a-zA-Z ]/g, " ")} onChange={onHandleInput} className='form_input' name={it}/>
+                <Input type='text' placeholder={it.replace(/[^a-zA-Z ]/g, " ")} onChange={onHandleInput} className='form_input' name={it}/> 
+                <ul class="form_errors"> 
+    {           <li> {`${it.replace(/[^a-zA-Z ]/g, " ")} is Required.`} </li> } 
+                </ul>  
             </div>)
         })}
+        
         <div className="submit_holder"> 
             {list.length > 0?<Button type="button" name="Submit" className="submit_button" onClick={onPress} displayName='Submit'/>:<p></p>}
         </div>

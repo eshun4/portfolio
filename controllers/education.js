@@ -7,6 +7,7 @@ const { ObjectId } = require("mongodb");
 const client = require('../redis/redis');
 const redis = require('../redis/redis');
 
+
 exports.create = (async(req,res)=>{
     /*  #swagger.tags = ['Education']  #swagger.ignore = true  */
     try{
@@ -19,18 +20,13 @@ exports.create = (async(req,res)=>{
             course:req.body.course,
             accomplishments:req.body.accomplishments,
             course_description:req.body.course_description,
-            talents:[],
-            fav_subjects:[],
-            school_clubs:[],
+            talents:req.body.talents,
+            fav_subjects:req.body.fav_subjects,
+            school_clubs:req.body.school_clubs,
             graduated:req.body.graduated,
             gpa:req.body.gpa
         });
-        //Come back to the 3 lines of code below later
-        education.talents.push(req.body.talents)
-        education.fav_subjects.push(req.body.fav_subjects)
-        education.school_clubs.push(req.body.school_clubs)
-        await education.save(
-            (err) => {
+        return education.save((err) => {
             if (err) {
                 res.status(500).send(handleError(err.errors));
             }else{
@@ -38,9 +34,10 @@ exports.create = (async(req,res)=>{
             }
           });
     }catch(err){
-        res.status(500).send(err);
+        res.status(500).send(err.message);
     }
-})
+});
+
 exports.read = (async(req,res)=>{
     try{
         var db = await connect(); 

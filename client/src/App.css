@@ -37,20 +37,38 @@ header {
 
 nav a {
 	margin: 0 3.5rem;
-	color: var(--textColor);
 	text-decoration: none;
 	font-size: 15px;
 	padding-top:8px;
 	padding-bottom:8px;
 	padding-left:5px;
 	padding-right:5px;
+	color: var(--textColor);
+	/* text-transform: capitalize; */
+	text-decoration: none;
+	letter-spacing: 0.15em;
+	display: inline-block;
+	padding: 15px 0px;
+	position: relative;
 	
 }
-
-nav a:hover {
-	color: var(--secondaryColor);
-	border-bottom: solid var(--secondaryColor) 2.0px;
-}
+nav a:after {    
+	background: none repeat scroll 0 0 transparent;
+	bottom: 0;
+	content: "";
+	display: block;
+	height: 2px;
+	left: 50%;
+	position: absolute;
+	background: #fff;
+	transition: width 0.3s ease 0s, left 0.3s ease 0s;
+	width: 0;
+  }
+  
+  nav a:hover:after { 
+	width: 100%; 
+	left: 0; 
+  }
 
 header .nav-btn {
 	padding: 5px;

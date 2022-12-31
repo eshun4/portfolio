@@ -16,17 +16,12 @@ exports.create = (async(req,res)=>{
             company:req.body.company,
             job_title:req.body.job_title,
             start_date:req.body.start_date,
-            end_date:[],
+            end_date:req.body.end_date,
             status:req.body.status,
-            location:[],
-            job_requirements:[],
-            type:[]
+            location:req.body.location,
+            job_requirements:req.body.job_requirements,
+            type:req.body.type
         });
-        //Come back to the 3 lines of code below later
-        experience.end_date.push(req.body.end_date);
-        experience.location.push(req.body.location);
-        experience.job_requirements.push(req.body.job_requirements);
-        experience.type.push(req.body.type);
         return experience.save((err) => {
             if (err) {
                 res.status(500).send(handleError(err.errors));

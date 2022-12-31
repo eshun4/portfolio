@@ -254,7 +254,7 @@
 
 .section_two{
   display:grid;
-  grid-template-columns: 50% 10% 40%;
+  grid-template-columns: 50% 50%;
   font-size: 1.4em;
   border-top:solid 0.4em var(--mainColor);
   border-bottom:solid 0.4em var(--secondaryColor);
@@ -345,7 +345,7 @@ tr:nth-child(even) {
   background-color: var(--secondaryColor);
   color:black;
 }
-
+/* 
 .add_button{
   padding:6px;
   border-radius: 12px;
@@ -357,7 +357,7 @@ tr:nth-child(even) {
   border: solid 0.2rem red;
   color:var(--secondaryColor);
 
-}
+} */
 .form_button:hover{
   border: solid 0.1rem red;
   color:var(--textColor);
@@ -637,6 +637,30 @@ form{
 .desc {
   font-size: 20px;
   color: var(--secondaryColor);
+}
+
+.form_errors{
+  justify-content: space-evenly;
+  text-decoration: none;
+  text-transform: capitalize;
+  text-align: center;
+  width:100%;
+  list-style: none;
+  color:var(--textColor);
+  font-size: 0.6em;
+  background-color: var(--secondaryColor);
+  white-space: nowrap ;
+  padding:0.4em;
+  animation: fadeinout 2s infinite;
+}
+
+.submit_button_div{
+  display:flex;
+  justify-content: center;
+  width:100%;
+  border: dashed 2px var(--mainColorLight);
+  margin-top:1em;
+  margin-bottom:1em;
 }
 
 

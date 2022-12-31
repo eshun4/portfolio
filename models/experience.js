@@ -14,27 +14,26 @@ const experienceSchema = new mongoose.Schema({
         type:String, 
         required:[true, "Start Date is Required."],
         validate:experienceValidator[0].validator3 ,},
-    end_date: [{
+    end_date: {
         type:String, 
         required:[true, "End Date is Required."],
-        validate:experienceValidator[0].validator4 ,},],
+        validate:experienceValidator[0].validator4 ,},
     status: {
         type:Boolean,
         required:[true, "Status is Required."],},
-    location: [{
+    location: {
         type:String, 
         required:[true, "Location is Required."],
-        validate:experienceValidator[0].validator6 ,},],
-    job_requirements: [{
+        validate:experienceValidator[0].validator6 ,},
+    job_requirements: {
         type:String, 
         required:[true, "Job Requirements is Required."],
-        validate:experienceValidator[0].validator7 ,},],
-    type:[
-        {
+        validate:experienceValidator[0].validator7 ,},
+    type:{
             type:String, 
             required:[true, "Type is Required."],
             validate:experienceValidator[0].validator8 ,},
-    ]
+    
 },
 {
   timestamps: true,

@@ -19,7 +19,6 @@ exports.create = (async(req,res)=>{
             accomplishments:req.body.accomplishments,
             tools_used:[]
         });
-        project.tools_used.push(req.body.tools_used);
         return project.save((err) => {
             if (err) {
                 res.status(500).send(handleError(err.errors));

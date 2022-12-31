@@ -24,18 +24,18 @@ const educationSchema = new mongoose.Schema({
         type:String, 
         required:[true, "Course description is Required."],
         validate:educationValidator[0].validator6 ,},
-    talents: [{type:String,
+    talents: {type:String,
             required:[true, "Talents is Required."],
              validate:educationValidator[0].validator7
-    }],
-    fav_subjects: [{type:String,
+    },
+    fav_subjects: {type:String,
         required:[true, "Favorite Subjects is Required."],
          validate:educationValidator[0].validator8
-    }],
-    school_clubs: [{type:String,
+    },
+    school_clubs: {type:String,
         required:[true, "School Clubs is Required."],
          validate:educationValidator[0].validator9
-    }],
+    },
     graduated: {
         type:Boolean, 
         required:[true, "Boolean is Required."] ,},
@@ -46,7 +46,7 @@ const educationSchema = new mongoose.Schema({
 },
 {
   timestamps: true,
-});
+},);
 
 
 

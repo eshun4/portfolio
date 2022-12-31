@@ -15,16 +15,11 @@ exports.create = (async(req,res)=>{
             tool_name:req.body.tool_name,
             tool_description:req.body.tool_description,
             year_acquired:req.body.year_acquired,
-            proficiency_level:[],
-            attributes:[],
-            work_ethics:[],
-            work_ethics_desc:[]
+            proficiency_level:req.body.proficiency_level,
+            attributes:req.body.attributes,
+            work_ethics:req.body.work_ethics,
+            work_ethics_desc:req.body.work_ethics_desc
         });
-        //Come back to the 3 lines of code below later
-        tool.proficiency_level.push(req.body.proficiency_level);
-        tool.attributes.push(req.body.attributes);
-        tool.work_ethics.push(req.body.work_ethics);
-        tool.work_ethics_desc.push(req.body.work_ethics_desc);
         return tool.save((err) => {
             if (err) {
                 res.status(500).send(handleError(err.errors));

@@ -12,21 +12,21 @@ const toolsSchema = new mongoose.Schema({
     year_acquired: {
         type:String, 
         required:[true, "Year Acquired is Required."],},
-    proficiency_level: [{
+    proficiency_level: {
         type:String, 
-        required:[true, "Proficiency is Required."],},],
-    attributes: [{
+        required:[true, "Proficiency Level is Required."],},
+    proficiency_level: {
         type:String, 
         required:[true, "Attributes is Required."],
-        validate:toolsValidator[0].validator5 ,},],
-    work_ethics: [{
+        validate:toolsValidator[0].validator5 },
+    work_ethics: {
         type:String, 
         required:[true, "Work Ethics is Required."],
-        validate:toolsValidator[0].validator6 ,},],
-    work_ethics_desc: [{
+        validate:toolsValidator[0].validator6  },
+    work_ethics_desc: {
         type:String, 
-        required:[true, "Work Ethics Description is Required."],
-        validate:toolsValidator[0].validator7 ,},],
+        required:[true, "Work Ethics Descriprion is Required."],
+        validate:toolsValidator[0].validator6  },
 },
 {
   timestamps: true,

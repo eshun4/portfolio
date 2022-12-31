@@ -2,22 +2,23 @@ import React, {useEffect, useState} from "react";
 // import Button from './Button';
 import DropDown from "../Components/Dropdown";
 import Form from "../Components/Form";
-import {  FaEdit, FaTrash } from "react-icons/fa";
+import {  FaEdit, FaTrash, FaPlus } from "react-icons/fa";
 import axios from "axios";
-import {FaTimes, FaPlus } from "react-icons/fa";
 import Card from '../Components/Card';
 
 const Table = ()=>{
     const [apiData, setApiData] = useState([]);
     const [endpoint, setEndPoint] = useState('');
     // const [keys, setKeys] = useState([]);
-    const [success, setSuccess] = useState({});
+    // const [success, setSuccess] = useState('');
     const [selected, setSelected] = useState([])
      // eslint-disable-next-line
     const [input, setInput] = useState({});
     const [ident, setId] = useState('');
-    const [error,setError]= useState('');
-    const [buttonState, setButtonState] = useState(false);
+    const [buttonState, setButtonState] = useState('');
+    // eslint-disable-next-line
+    // const [error,setError]= useState('');
+    // const [buttonState, setButtonState] = useState(false);
     
    
 
@@ -25,13 +26,13 @@ const Table = ()=>{
         setEndPoint(event.target.value);
     }
 
-    const closeSuccess = (className)=>{
-        return document.querySelector(`${className}`).style.display = 'none';
-    }
+    // const closeSuccess = (className)=>{
+    //     return document.querySelector(`${className}`).style.display = 'none';
+    // }
 
-    const handleSuccess = ()=>{
-        setSuccess({...success, success:success});
-    }
+    // const handleSuccess = ()=>{
+    //     setSuccess(success);
+    // }
 
     var inp = document.querySelectorAll('.form_input');
     const myObject = {}
@@ -62,30 +63,41 @@ const Table = ()=>{
     }
     const deleteData = async(id)=>{
         await axios.delete(`http://localhost:5000/${endpoint}/${id}`)
-        .then((response)=> setSuccess(response.data));
+        .then((response)=> console.log(response.data));
         setApiData(apiData.filter(p=> p._id !== id));
-        document.querySelector('.error').style.display = 'flex';
+        // document.querySelector('.error').style.display = 'flex';
     }
 
-    const HandleUpdate = (item)=>{
-        setSelected(Object.keys(item));
-        setId(item._id.toString());
+    const GetFormFromError = async()=>{
+        setButtonState("add");
+        await axios.post(`http://localhost:5000/${endpoint}`, myObject)
+        .then((response)=> console.log(response.data)).catch((error)=> setSelected(Object.keys(error.response.data)));
+        setButtonState("add")
+        
     }
 
     const upDateData = async(ident)=>{
         await axios.put(`http://localhost:5000/${endpoint}/${ident}`, myObject)
-        .then((response)=> setSuccess(response.data)).catch((error)=> setError(error.response.data));
-        setButtonState(false);
-        // fetchApi();
-        document.querySelector('.form_error').style.display = 'flex';
+        .then((response)=> console.log(response.data)).catch((error)=> console.log(error));
+        // document.querySelector('.form_error').style.display = 'flex';
+        fetchApi();
+        setButtonState("update");
+        
     }
+
+    const HandleUpdate = (item)=>{
+        setButtonState("update");
+        setSelected(Object.keys(item));
+        setId(item._id.toString());
+    }
+    
 
     const addData = async()=>{
         await axios.post(`http://localhost:5000/${endpoint}`, myObject)
-        .then((response)=> setSuccess(response.data)).catch((error)=> setSelected(Object.keys(error.response.data)));
-        // document.querySelector('.form_error').style.display = 'flex';
+        .then((response)=> console.log(response.data)).catch((error)=> console.log(error.response.data));
         fetchApi();
-        document.querySelector("form").reset();
+        setButtonState('');
+        // document.querySelector("form").reset();
     }
 
 
@@ -93,18 +105,29 @@ const Table = ()=>{
         deleteData(item._id)
     };
 
-    const HandleAddData = ()=>{
-        addData();
-        setButtonState(true);
+    const submitHandler = (buttonSt, id)=>
+    {
+        if(buttonSt==="add"){
+            addData();
+        }else{
+            upDateData(id)
+        }
+        // switch(buttonSt){
+        //     case "add":
+        //         addData();
+        //         break;
+        //     case "update":
+        //         upDateData(id)
+        //         break
+        //     default:
+        //         console.log("You pressed this button");
+        //         break
+        // }
     }
-    
 
 
     useEffect(()=>{
         fetchApi(); 
-        // getKeys();   
-        document.querySelector('.error').style.display = 'none';  
-        document.querySelector('.form_error').style.display = 'none';    // eslint-disable-next-line  
           // eslint-disable-next-line  
     }, [ endpoint])
     return(
@@ -113,10 +136,8 @@ const Table = ()=>{
     <div className="section_two_box1"> 
        <h3>Select Route: {endpoint}</h3>
     </div>
-     <FaPlus className="add_button" onClick={()=>HandleAddData()}/>
     <div className="section_two_box2"> 
        <DropDown onChange={handleChange}/>
-       <p onChange={handleSuccess} className="error"> {success.message} <FaTimes className="modal_button_error" onClick={()=>closeSuccess('.error')}/></p>
     </div> 
     </section>
     <div id="table_box">
@@ -149,9 +170,11 @@ const Table = ()=>{
         )}   
 </table>
     </div>
-    <div className='form_error'>{error} <FaTimes className="modal_button_error" onClick={()=>closeSuccess('.form_error')}/></div>
+    <div className="submit_button_div"> <FaPlus className="submit_button" onClick={()=>GetFormFromError()}/></div>
     <div className="forms">
-    <Form list={selected} onHandleInput={onHandleInput} onPress={()=>buttonState === false ?upDateData(ident):addData()} />
+    {selected.length <= 0?
+    <h3 className="submit_button_div"> Select a Route and Press the Plus Button to Start</h3>
+    :<Form list={selected} onHandleInput={onHandleInput} onPress={()=>submitHandler(buttonState,ident)} />}
     <div> 
     <Card/>   
     </div>
