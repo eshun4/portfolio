@@ -5,6 +5,7 @@ import Quotes from "../Components/Quotes";
 import ReadMoreReadLess from "../Components/ReadMoreReadLess";
 import SearchHeader from "../Components/SearchHeader";
 import TimeAndDate from "../Components/TimeAndDate";
+import LoadingIndicator from "../Components/LoadingIndicator";
 import env from "../utilities/environments_configs";
 const configuration = env.state.configurations;
 
@@ -27,9 +28,9 @@ class Education extends React.Component{
 
     render(){
         const {results} = this.state;
-        const loading = { textAlign:'center',
-        fontSize:'1.2em'
-      }
+    //     const loading = { textAlign:'center',
+    //     fontSize:'1.2em'
+    //   }
         return (
             <div>
             <Nav/>
@@ -81,7 +82,7 @@ class Education extends React.Component{
                                      </div> */}
                                     </div>
                                 </section>
-             ):<p style={loading}> Loading...</p>}
+             ):<LoadingIndicator/>}
                 </div>
                 <div className="belowNav"> </div>
                 </div>)

@@ -2,6 +2,7 @@ import React from 'react';
 import Nav from "../Components/NavBar";
 import SearchHeader from '../Components/SearchHeader';
 import "../CSS/Small/small.css";
+import LoadingIndicator from "../Components/LoadingIndicator";
 import axios from 'axios';
 import env from "../utilities/environments_configs";
 const configuration = env.state.configurations;
@@ -26,7 +27,7 @@ class Home extends React.Component {
             <div className="belowNav"></div>
             <div className="homeBody">     
             {this.state.homeText.length > 0 
-                && this.state.homeText.map((item,index)=>{
+                ? this.state.homeText.map((item,index)=>{
                     return(
                         <div key={index} className="home_section_background">
                         <section className="home_section_one"> 
@@ -52,7 +53,7 @@ class Home extends React.Component {
                         </section>
                         </div>
                         )
-                })} 
+                }):<LoadingIndicator/>} 
             </div>
             <div className="belowNav_2"></div>
           </div>)

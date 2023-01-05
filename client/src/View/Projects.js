@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Nav from "../Components/NavBar";
 import ReadMoreReadLess from "../Components/ReadMoreReadLess";
 import SearchHeader from "../Components/SearchHeader";
+import LoadingIndicator from "../Components/LoadingIndicator.js"
 import env from "../utilities/environments_configs";
 const configuration = env.state.configurations;
 // import { FaBars, FaTimes } from "react-icons/fa";
@@ -24,7 +25,8 @@ const Projects = ()=>{
         .then((response)=> setRiddle([...response.data]));
     }
     
-    return (
+    return (projects.length < 0 && riddle.length < 0 ?
+    <LoadingIndicator/>:
         <div> 
         <Nav/>
         <SearchHeader/>
