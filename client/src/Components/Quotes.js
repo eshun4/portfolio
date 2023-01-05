@@ -1,12 +1,15 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import env from "../utilities/environments_configs";
+const configuration = env.state.configurations;
+
 const Quotes = ({quoteClass,authorClass, outerBoxClass, url_endpoint})=>{
     const [quote, setQuote]= useState([])
    
     
     const getQuoteData = async()=>{
         axios.get(`https://api.api-ninjas.com/v1/quotes?category=${url_endpoint}`, 
-        {headers: { 'X-Api-Key': 'MXDpgwM2IkDeQUB1VxebKg==Wg57rs0u3gO0U11a'},
+        {headers: { 'X-Api-Key': `${configuration.REACT_APP_API_NINJA_KEY}`},
         contentType: 'application/json'})
         .then((response)=> response.data)
         .then((data)=> setQuote(data))

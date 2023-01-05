@@ -5,6 +5,9 @@ import Quotes from "../Components/Quotes";
 import ReadMoreReadLess from "../Components/ReadMoreReadLess";
 import SearchHeader from "../Components/SearchHeader";
 import TimeAndDate from "../Components/TimeAndDate";
+import env from "../utilities/environments_configs";
+const configuration = env.state.configurations;
+
 // import { FaPenFancy} from "react-icons/fa";
 class Education extends React.Component{
     constructor(props){
@@ -17,7 +20,7 @@ class Education extends React.Component{
     
      fetchEducation = async() => {
         await axios
-        .get('https://kofijunioreshun.onrender.com/v1/portfolio/kofijnreshun/dev/admin_portfolio_panel/admin_kje/education')
+        .get(`${configuration.REACT_APP_BASE_URL}/v1/portfolio/kofijnreshun/dev/admin_portfolio_panel/admin_kje/education`)
         .then(response => this.setState({results:[ ...response.data]}))
         .catch(error=>console.log(error));
     }

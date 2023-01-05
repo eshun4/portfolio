@@ -807,7 +807,7 @@ form{
 }
 
 .belowNav_2{
-  height:42.9em;
+  height:43.2em;
 }
 
 /* CSS Code for Educational Route */
@@ -827,9 +827,11 @@ form{
 }
 
 .edu_section1_box2{
-  background-color:var(--secondaryColor);
+   background: linear-gradient(to top,#0b1a58a5 , #db2b3aaa), url('../src/images/background/starry_sky.jpeg')  no-repeat top center;
+  background-size: cover;
   border-top: solid 0.2em var(--mainColorLight);
   box-shadow: 2px 0px 0px 2px rgba(0,0,0,0.6);
+  background-position-y: -6.9em;
   
 }
 .quote_section{
@@ -838,7 +840,7 @@ form{
 }
 
 .quote_box{
-  background-color:var(--mainColor);
+  background-color:#0b1a589e;
   margin-left:1em;
   margin-right:1em;
   margin-top:1em;
@@ -861,7 +863,7 @@ form{
   margin-right:20em;
   margin-top:1em;
   margin-bottom:1em;
-  background-color: var(--mainColor);
+  background-color:#0b1a589e;
   letter-spacing: 0.2em;
   border-radius: 0.6em;
   box-shadow: 2px 0px 0px 2px rgba(0,0,0,0.6);
@@ -886,7 +888,7 @@ form{
 .time_date >h2{
   margin-top:0.3em ;
   font-family: 'Rock Salt', cursive;
-  font-size:2.6em;
+  font-size:2.4em;
   font-weight:bold;
   background-color:var(--secondaryColor);
   margin-left:0.3em;
@@ -916,14 +918,16 @@ form{
   box-shadow: 2px 0px 0px 2px rgba(0,0,0,0.6);
 }
 .edu_section2_even_box2{
-  background-color:var(--mainColor);
   width:100%;
   color:var(--textColor);
   box-shadow: 2px 0px 0px 2px rgba(0,0,0,0.6);
+  background: linear-gradient(to top,#0b1a58a5 , #db2b3aaa), url('../src/images/background/presec_legon.jpg')  no-repeat top center;
+  background-size: cover;
 }
 
-.edu_section2_odd_box1, .edu_section2_even_box2{
-  background-color:var(--mainColor);
+.edu_section2_odd_box1{
+  background: linear-gradient(to bottom,#0b1a58a5 , #db2b3aaa), url('../src/images/background/byu_idaho.jpg')  no-repeat top center;
+  background-size: cover;
   color:var(--textColor);
 }
 .years{
@@ -934,11 +938,11 @@ form{
   padding-bottom: 0.4em;
   font-weight: bolder;
   letter-spacing: 0.2em;
-  
 }
 
 .edu_section2_odd_box2{
   background-color:var(--secondaryColor);
+  
 }
 
 .school_even, .school_odd{
@@ -947,7 +951,7 @@ form{
   font-size:1.2em;
   text-align: center;
   padding: 0.4em;
-  background-color:var(--secondaryColor);
+  background-color:#db2b3ad5;
   margin: 0.4em;
    color:var(--textColor);
    letter-spacing: 0.2em;
@@ -1196,7 +1200,6 @@ form{
 
 .riddle_answer{
   font-size:0.8em;
-  text-transform: capitalize;
   justify-self: center;
   display: flex;
   justify-content: center;
@@ -1331,7 +1334,7 @@ form{
   line-height:1.4em;
   padding-left:0.3em ;
   padding-right:0em ;
-  font-weight: normal;
+  text-transform: inherit;
 }
 
 .proj_section_2_box2_results{

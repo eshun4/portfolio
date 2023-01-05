@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import Nav from "../Components/NavBar";
 import ReadMoreReadLess from "../Components/ReadMoreReadLess";
 import SearchHeader from "../Components/SearchHeader";
+import env from "../utilities/environments_configs";
+const configuration = env.state.configurations;
 // import { FaBars, FaTimes } from "react-icons/fa";
 const Projects = ()=>{
     const [riddle, setRiddle] = useState([]);
@@ -12,12 +14,12 @@ const Projects = ()=>{
         getRiddles();
     }, [])
     
-    const fetchProjects = async() => await axios.get('https://kofijunioreshun.onrender.com/v1/portfolio/kofijnreshun/dev/admin_portfolio_panel/admin_kje/projects')
+    const fetchProjects = async() => await axios.get(`${configuration.REACT_APP_BASE_URL}/v1/portfolio/kofijnreshun/dev/admin_portfolio_panel/admin_kje/projects`)
     .then(response=>setProjects(response.data));
 
     const getRiddles = async()=>{
         axios.get(`https://api.api-ninjas.com/v1/riddles`, 
-        {headers: { 'X-Api-Key': 'MXDpgwM2IkDeQUB1VxebKg==Wg57rs0u3gO0U11a'},
+        {headers: { 'X-Api-Key': `${configuration.REACT_APP_API_NINJA_KEY}`},
         contentType: 'application/json'})
         .then((response)=> setRiddle([...response.data]));
     }

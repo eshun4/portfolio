@@ -3,7 +3,8 @@ import Nav from "../Components/NavBar";
 import SearchHeader from '../Components/SearchHeader';
 import "../CSS/Small/small.css";
 import axios from 'axios';
-
+import env from "../utilities/environments_configs";
+const configuration = env.state.configurations;
 
 class Home extends React.Component {
     constructor(props){
@@ -58,7 +59,7 @@ class Home extends React.Component {
     }
 
     componentDidMount(){
-        axios.get('https://kofijunioreshun.onrender.com')
+        axios.get(`${configuration.REACT_APP_BASE_URL}`)
         .then(response => this.setState({homeText:[...response.data]}))
         .catch(error=>console.log(error));
     }

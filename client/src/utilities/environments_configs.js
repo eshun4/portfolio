@@ -35,6 +35,7 @@ const configurations = {
     /* pulls the Redis URL from .env */
     REACT_APP_REDIS_URL:process.env.REACT_APP_REDIS_URL,
     REACT_APP_REDIS_PORT:process.env.REACT_APP_REDIS_PORT,
+    REACT_APP_API_NINJA_KEY:process.env.REACT_APP_API_NINJA_KEY
 }
 
 class Configurations {

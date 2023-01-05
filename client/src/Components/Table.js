@@ -5,6 +5,8 @@ import Form from "../Components/Form";
 import {  FaEdit, FaTrash, FaPlus } from "react-icons/fa";
 import axios from "axios";
 import Card from '../Components/Card';
+import env from '../utilities/environments_configs';
+const configuration = env.state.configurations;
 
 const Table = ()=>{
     const [apiData, setApiData] = useState([]);
@@ -51,7 +53,7 @@ const Table = ()=>{
     const filterFunc = ([key,val]) =>key !=='_id' && key !=='__v';
 
     const fetchApi = async(method)=>{
-        await axios.get(`https://kofijunioreshun.onrender.com/v1/portfolio/kofijnreshun/dev/admin_portfolio_panel/admin_kje/${endpoint}`,
+        await axios.get(`${configuration.REACT_APP_BASE_URL}/v1/portfolio/kofijnreshun/dev/admin_portfolio_panel/admin_kje/${endpoint}`,
         {
             headers: {
               'Content-Type': 'application/json'
@@ -62,7 +64,7 @@ const Table = ()=>{
         .then((data)=> setApiData(data))
     }
     const deleteData = async(id)=>{
-        await axios.delete(`https://kofijunioreshun.onrender.com/${endpoint}/${id}`)
+        await axios.delete(`${configuration.REACT_APP_BASE_URL}/${endpoint}/${id}`)
         .then((response)=> console.log(response.data));
         setApiData(apiData.filter(p=> p._id !== id));
         // document.querySelector('.error').style.display = 'flex';
@@ -70,14 +72,14 @@ const Table = ()=>{
 
     const GetFormFromError = async()=>{
         setButtonState("add");
-        await axios.post(`https://kofijunioreshun.onrender.com/${endpoint}`, myObject)
+        await axios.post(`${configuration.REACT_APP_BASE_URL}/${endpoint}`, myObject)
         .then((response)=> console.log(response.data)).catch((error)=> setSelected(Object.keys(error.response.data)));
         setButtonState("add")
         
     }
 
     const upDateData = async(ident)=>{
-        await axios.put(`https://kofijunioreshun.onrender.com/${endpoint}/${ident}`, myObject)
+        await axios.put(`${configuration.REACT_APP_BASE_URL}/${endpoint}/${ident}`, myObject)
         .then((response)=> console.log(response.data)).catch((error)=> console.log(error));
         // document.querySelector('.form_error').style.display = 'flex';
         fetchApi();
@@ -93,7 +95,7 @@ const Table = ()=>{
     
 
     const addData = async()=>{
-        await axios.post(`https://kofijunioreshun.onrender.com/${endpoint}`, myObject)
+        await axios.post(`${configuration.REACT_APP_BASE_URL}/${endpoint}`, myObject)
         .then((response)=> console.log(response.data)).catch((error)=> console.log(error.response.data));
         fetchApi();
         setButtonState('');
