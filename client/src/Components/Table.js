@@ -51,7 +51,7 @@ const Table = ()=>{
     const filterFunc = ([key,val]) =>key !=='_id' && key !=='__v';
 
     const fetchApi = async(method)=>{
-        await axios.get(`http://localhost:5000/v1/portfolio/kofijnreshun/dev/admin_portfolio_panel/admin_kje/${endpoint}`,
+        await axios.get(`https://kofijunioreshun.onrender.com/v1/portfolio/kofijnreshun/dev/admin_portfolio_panel/admin_kje/${endpoint}`,
         {
             headers: {
               'Content-Type': 'application/json'
@@ -62,7 +62,7 @@ const Table = ()=>{
         .then((data)=> setApiData(data))
     }
     const deleteData = async(id)=>{
-        await axios.delete(`http://localhost:5000/${endpoint}/${id}`)
+        await axios.delete(`https://kofijunioreshun.onrender.com/${endpoint}/${id}`)
         .then((response)=> console.log(response.data));
         setApiData(apiData.filter(p=> p._id !== id));
         // document.querySelector('.error').style.display = 'flex';
@@ -70,14 +70,14 @@ const Table = ()=>{
 
     const GetFormFromError = async()=>{
         setButtonState("add");
-        await axios.post(`http://localhost:5000/${endpoint}`, myObject)
+        await axios.post(`https://kofijunioreshun.onrender.com/${endpoint}`, myObject)
         .then((response)=> console.log(response.data)).catch((error)=> setSelected(Object.keys(error.response.data)));
         setButtonState("add")
         
     }
 
     const upDateData = async(ident)=>{
-        await axios.put(`http://localhost:5000/${endpoint}/${ident}`, myObject)
+        await axios.put(`https://kofijunioreshun.onrender.com/${endpoint}/${ident}`, myObject)
         .then((response)=> console.log(response.data)).catch((error)=> console.log(error));
         // document.querySelector('.form_error').style.display = 'flex';
         fetchApi();
@@ -93,7 +93,7 @@ const Table = ()=>{
     
 
     const addData = async()=>{
-        await axios.post(`http://localhost:5000/${endpoint}`, myObject)
+        await axios.post(`https://kofijunioreshun.onrender.com/${endpoint}`, myObject)
         .then((response)=> console.log(response.data)).catch((error)=> console.log(error.response.data));
         fetchApi();
         setButtonState('');

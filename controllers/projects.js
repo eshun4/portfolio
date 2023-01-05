@@ -17,7 +17,7 @@ exports.create = (async(req,res)=>{
             requirements:req.body.requirements,
             results:req.body.results,
             accomplishments:req.body.accomplishments,
-            tools_used:[]
+            tools_used:req.body.tools_used
         });
         return project.save((err) => {
             if (err) {

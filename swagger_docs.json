@@ -56,7 +56,7 @@
         }
       }
     },
-    "/edu/{id}": {
+    "/education/{id}": {
       "get": {
         "tags": [
           "Education"
@@ -73,7 +73,7 @@
         "responses": {}
       }
     },
-    "/exp/{id}": {
+    "/experience/{id}": {
       "get": {
         "tags": [
           "Experience"
@@ -90,7 +90,7 @@
         "responses": {}
       }
     },
-    "/proj/{id}": {
+    "/projects/{id}": {
       "get": {
         "tags": [
           "Projects"
@@ -107,7 +107,7 @@
         "responses": {}
       }
     },
-    "/cv/{id}": {
+    "/resume_cv/{id}": {
       "get": {
         "tags": [
           "Resume"
@@ -124,7 +124,7 @@
         "responses": {}
       }
     },
-    "/T_and_E/{id}": {
+    "/tools_and_ethics/{id}": {
       "get": {
         "tags": [
           "Tools"

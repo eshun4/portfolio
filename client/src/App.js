@@ -1,17 +1,9 @@
 import './App.css';
-import Nav from "./Components/NavBar";
-import SearchHeader from '../src/Components/SearchHeader';
+import Home from "../src/View/Home";
 
 function App() {
   return (
-    <div >
-      <header className="App-header">
-      <Nav/>                    
-      </header>
-      <SearchHeader/>
-      <div className="belowNav">
-                    </div>
-    </div>
+    <Home/>
   );
 }
 

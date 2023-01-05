@@ -17,9 +17,9 @@ function Nav() {
 				<Link to="/">Home</Link>
 				<Link to="/education">Education</Link>
 				<Link to="/projects">Projects</Link>
-				<Link to="/tools">Tools</Link>
+				{/* <Link to="/tools">Tools</Link>
                 <Link to="/ethics">Ethics</Link>
-                <Link to="/resume">Resume/CV</Link>                
+                <Link to="/resume">Resume/CV</Link>                 */}
 				<button
 					className="nav-btn nav-close-btn"
 					onClick={showNavbar}>

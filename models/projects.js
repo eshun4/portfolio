@@ -28,9 +28,10 @@ const projectsSchema = new mongoose.Schema({
         type:String, 
         required:[true, "Accomplishments is Required."],
         validate:projectsValidator[0].validator6 ,},
-    tools_used: [{
-        type:mongoose.Types.ObjectId, 
-        ref:configure.DB_COLLECTION_4, }],
+    tools_used:  {
+        type:String, 
+        required:[true, "Tools Used is Required."],
+        validate:projectsValidator[0].validator7 ,},
 },
 {
   timestamps: true,

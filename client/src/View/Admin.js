@@ -1,8 +1,8 @@
 import React from "react";
 import Nav from "../Components/NavBar";
 import SearchHeader from "../Components/SearchHeader";
-import "../Admin.css";
-
+import '../CSS/Medium/medium.css'
+import '../CSS/Small/small.css'
 import Table from '../Components/Table';
 import TimeAndDate from "../Components/TimeAndDate";
 import Quotes from "../Components/Quotes";
@@ -16,7 +16,7 @@ const Admin = ()=>{
         <div className="belowNav"> </div>
     <div className="realBody"> 
         <section className="section_one">
-        <Quotes/>
+        <Quotes outerBoxClass="section_one_box1" authorClass="author" quoteClass="quote" url_endpoint="inspirational"/>
         <TimeAndDate/>
         </section>
         <section>
