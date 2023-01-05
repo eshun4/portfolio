@@ -25,8 +25,7 @@ const Projects = ()=>{
         .then((response)=> setRiddle([...response.data]));
     }
     
-    return (projects.length < 0 && riddle.length < 0 ?
-    <LoadingIndicator/>:
+    return (
         <div> 
         <Nav/>
         <SearchHeader/>
@@ -117,7 +116,7 @@ const Projects = ()=>{
                                             </div>
                                         </div>
                                     </section> 
-                ) :<p> Loading...</p>
+                ) :<LoadingIndicator/>
              }
             </div>
             <div className="belowNav"> </div>
