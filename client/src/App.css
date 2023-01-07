@@ -91,11 +91,65 @@ nav {
 	align-items: center;
 }
 
+.dropList{
+  display: grid;
+  grid-template-columns: 1.1fr 1.4fr 1.36fr;
+  position:fixed;
+  top:2.6em;
+  left:0em;
+  text-align: left;
+  width:100%;
+  background-color: transparent;
+  border-radius: 0.6em;
+  padding-top: 0.6em;
+  padding-bottom: 0.6em;
+  color:var(--textColor);
+}
+
+.dropList_main{
+ background-color: #0b1a58;
+ width:100%;
+ padding-left: 0.6em;
+ padding-right: 0.6em;
+ box-shadow: 0 2px 10px 0 rgba(0,0,0,0.6);
+ border-radius: 0.6em;
+ height:20em;
+ overflow-y: scroll;
+ margin-right: 30em;
+}
+
+.dropList_main::-webkit-scrollbar{
+  display: none;
+}
+.dropList_main >h3{
+  margin-top: 0.6em;
+  margin-bottom: 0.6em;
+  padding-top: 0.8em;
+  padding-bottom: 0.8em;
+  border-top: solid 0.1em var(--textColor);
+  border-bottom:solid 0.1em var(--textColor);
+  font-size: 0.6em;
+  font-style: italic;
+  line-height: 1.4em;
+  letter-spacing: 0.4em;
+ }
+
+ .dropList_main >p{
+  margin-top: 0.6em;
+  margin-bottom: 0.6em;
+  padding-top: 0.8em;
+  padding-bottom: 0.8em;
+  border-top: solid 0.1em var(--textColor);
+  border-bottom:solid 0.1em var(--textColor);
+  font-size:small;
+  line-height: 1.4em;
+  letter-spacing: 0.1em;
+ }
 
 
 
 .realBody{
-	margin: 0;
+	/* margin: 0; */
 	box-sizing: border-box;
   max-width: 1200px;
   margin:0 auto;

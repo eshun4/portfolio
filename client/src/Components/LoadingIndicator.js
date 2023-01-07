@@ -8,11 +8,11 @@ const LoadingIndicator = ()=>{
         <div className="realBody">
                     <div className="belowNav">
                     </div>
-                    <div class="wrap">
-                    <div class="loading-circle">
-                    <div class="loading-circle__inner">
-                        <div class="circle"><span class="line item"></span></div>
-                        <p class="attention--en">Loading...</p>
+                    <div className="wrap">
+                    <div className="loading-circle">
+                    <div className="loading-circle__inner">
+                        <div className="circle"><span className="line item"></span></div>
+                        <p className="attention--en">Loading...</p>
                     </div>
                     </div>
                     </div>

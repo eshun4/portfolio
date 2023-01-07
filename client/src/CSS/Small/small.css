@@ -11,8 +11,12 @@
 and (min-device-width : 360px)   
 and (max-device-width : 640px)   {
 .navbox3{
-  visibility: hidden;
+  display:none;
 }
+.navbox1{
+  width:100%;
+}
+
 	header .nav-btn {
 		visibility: visible;
 		opacity: 1;
@@ -48,7 +52,40 @@ and (max-device-width : 640px)   {
 	nav a {
 		font-size: 1.5rem;
 	}
+  .searchBar {
+    float: right;
+    padding: 6px;
+    border: solid var(--mainColorLight)  1px;
+    margin-right: 0px;
+    margin-left: 0px;
+    font-size: 17px;
+    width:100%;
+    height:2.6rem;
+	  padding: 12px 12px;
+	  box-shadow: 0 2px 10px 0 rgba(0,0,0,0.6);
+	  border-radius: 2px;
+  }
 
+  .searchHeader{
+    background-color: var(--mainColor);
+    width:100%;
+    height:3.1rem;
+    z-index:1;
+    display: block;
+    justify-content: space-between;
+    box-shadow: 2px 2px 2px  grey;
+    border-bottom: solid 2px var(--mainColorLight);
+    border-top: solid 2px var(--mainColorLight);
+    font-family: 'Roboto Serif', serif;
+    /* padding: 0 0rem; */
+    position: fixed;
+    box-shadow: 0 2px 10px 0 rgba(0,0,0,0.6);
+    /* padding-left:1.8em */
+  }
+
+  .navbox2{
+    display:none;
+  }
 
   /* Below are all the routes for the homepage */
   .home_section_background{
